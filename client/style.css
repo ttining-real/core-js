@@ -1,0 +1,23 @@
+body {
+  font-family: 'SUIT Variable', sans-serif;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  gap: 4px;
+  span {
+    color: #333;
+    font-weight: 300;
+    img {
+      width: 24px;
+    }
+  }
+}

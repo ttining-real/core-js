@@ -6,6 +6,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #212121;
 }
 
 h1 {
@@ -14,10 +15,11 @@ h1 {
   align-items: center;
   gap: 4px;
   span {
-    color: #333;
+    color: #ededed;
     font-weight: 300;
     img {
-      width: 24px;
+      width: 20px;
+      margin: 0 8px;
     }
   }
 }

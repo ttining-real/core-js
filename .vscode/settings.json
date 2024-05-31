@@ -1,0 +1,39 @@
+{
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": [
+          "comment"
+        ],
+        "settings": {
+          "fontStyle": "",
+          "foreground": "#baba61a5"
+        }
+      },
+      {
+        "scope": [
+          "entity.other.inherited-class",
+          "entity.other.attribute-name",
+          "variable.parameter",
+          "variable.language",
+          "storage.modifier",
+          "storage.type"
+        ],
+        "settings": {
+          "fontStyle": ""
+        }
+      }
+    ]
+  },
+  // Bracket-pair guides
+"editor.guides.bracketPairs": true,
+"editor.guides.bracketPairsHorizontal": true,       // shows horizontal line
+"editor.guides.highlightActiveBracketPair": true,   // highlight both horizontal and vertical lines
+
+// Bracket-pair colorization
+"editor.bracketPairColorization.enabled": false, 
+"editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+
+// Indentation lines
+"editor.guides.indentation": true                   // shows vertical lines
+}

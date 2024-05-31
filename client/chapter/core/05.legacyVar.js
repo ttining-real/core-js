@@ -15,7 +15,7 @@ console.log(outside);
 // var는 변수의 중복 선언을 허용합니다
 
 var a = 10;
-var a = 20;
+// var a = 20;
 
 console.log(a);
 

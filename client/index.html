@@ -8,13 +8,16 @@
   <link rel="shortcut icon" href="./assets/tiger.svg" type="image/x-icon" />
   <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT/fonts/variable/woff2/SUIT-Variable.css" rel="stylesheet" />
   <link rel="stylesheet" href="./style.css" />
-  <script src="./chapter/core/09-2.conditions.js"></script>
+  <!-- defer : 모든 HTML을 읽고 js 파일을 읽도록 함. -->
+  <!-- type="module"은 defer가 기본 설정이다. -->
+  <script defer src="./chapter/core/10-2.loop.js"></script>
 </head>
 
 <body>
+  <!-- html을 구성하는 아주 작은 요소들을 Node(DOM Node)라고 한다. -->
   <h1>
-    <span><img src="./assets/tiger.svg" alt="" />hello<img src="./assets/tiger.svg" alt="" /></span>
-    <span>javascript</span>
+    <span class="first"><img src="./assets/tiger.svg" alt="" />hello<img src="./assets/tiger.svg" alt="" /></span>
+    <span class="second">javascript</span>
   </h1>
 </body>
 

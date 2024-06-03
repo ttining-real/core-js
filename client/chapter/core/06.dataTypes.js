@@ -113,7 +113,7 @@ const user = {
   
   // * 전역의 오염을 막아야한다.
   
-  // 3 concise(축약) meethod : 키와 값을 구분하지 않는다.
+  // 3 concise(축약) method : 키와 값을 구분하지 않는다.
   // prototype이 내장되어있지 않아 가볍다.
   // 결론 : 이걸 더 많이 씀 (메서드에서는)
   sayHi3() { 

@@ -61,6 +61,8 @@ let first = document.querySelector('.first');
 // } while(first.nodeType !== 1)
 
   function next(node) {
+
+    if(typeof node === 'string') node = document.querySelector(node);
     
     do{
 

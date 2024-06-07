@@ -48,8 +48,8 @@ const result = calcPrice(1000, 3000);
 // 좋은 함수 작성 여건
 // 1. 함수의 이름을 잘 지어야 한다. (동사) / 가독성 => 읽었을 때 바로 기능을 알 수 있다.
 // 2. 전역의 오염을 막는다.
-// 3. 하나의 기능만을 수행한다.
-// 4. 재사용성이 좋아야 한다.
+// 3. 하나의 기능만을 수행한다. (1번과 연결, 하나의 기능만 담당하면 이름 짓기도 쉬워진다.)
+// 4. 재사용성이 좋아야 한다. (매개변수 <=> 유연한 함수)
 
 
 
@@ -86,6 +86,8 @@ console.assert(rem('30px',10) === '3rem')
 // css(node: string, prop: string, value: number|strung) : string;
 const first = document.querySelector('.first');
 
+// setting을 목적으로 하는 함수는 값을 반환할 필요가 없다(return문 X)
+// * setter 값을 설정하는 거니까 return이 없음 (undefined)
 function setStyle(node, prop, value) {
 
   if(typeof node === 'string') node = document.querySelector(node)
@@ -122,3 +124,63 @@ setStyle('.first', 'color');
 // 2. h1의 폰트 사이즈를 가져온다.
 // 3. 증가함수와 감소함수를 만든다.
 // 4. 클릭 이벤트와 바인딩한다.
+
+// function getStyle(name, edit) {
+//   const elem = document.querySelector('.first');
+
+//   name.style[edit] = style;
+// }
+
+// getStyle('.first', 'fontSize');
+
+
+/*
+
+  함수 만들기 tip
+
+  1. 함수 이름 짓기
+  2. argument (함수 실행부 (미리) 작성하기)
+  3. parameter (매개변수를 어떻게 받을지)
+  4. return value
+  5. validation
+  6. Test Driven Development (TDD)
+
+ */
+
+// * getter
+function getStyle(node, prop) {
+
+  if(typeof node === 'string') node = document.querySelector(node);
+  if(typeof prop !== 'string') throw new Error('getStyle 함수의 두 번째 인수는 문자 타입이어야 합니다.')
+
+  return getComputedStyle(node)[prop];
+
+}
+
+const h1FontSize = getStyle('.first', 'fontSize'); // 32px
+
+function css(node,prop,value){
+
+  // if(!value){
+  //   // getter
+  //   return getStyle(node,prop) // 값을 반환해서 사용하기 위해 return이 필요함
+
+  // }else{
+  //   // setter
+  //   setStyle(node,prop,value)
+  // }
+
+  // * => 사망식으로 바꿔보기 (생존식은 엄나요,,?ㅎ 깔깔~ㅎ)
+  // setStyle이것도 리턴이 되지 안나요..? => undefined 나오잔아요,,,
+  // 근데 어쩔..? 어차피 css 함수는 undefined 리턴함
+  // 값에 담지만 않으면 상관 없다.
+  return !value ? getStyle(node,prop) : setStyle(node,prop,value);
+
+  // condition ? value1 : value2
+}
+
+// const css2 = (node,prop,value) => !value ? getStyle(node,prop) : setStyle(node,prop,value);
+
+// css2('.first','color','red') // setter
+
+css('.first','color') // getter

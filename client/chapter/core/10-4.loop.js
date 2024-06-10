@@ -7,6 +7,7 @@ const javaScript = {
   createAt: '1995.05',
   standardName: 'ECMAScript',
   currentVersion: 2023,
+  
   // hasOwnProperty 메서드 훼손
   hasOwnProperty(){
     return '난 누굴까~?'
@@ -17,6 +18,8 @@ const javaScript = {
 // console.log(`currentVersion` in javaScript); // true
 // console.log(`toString` in javaScript); // true
 // console.log(`valueOf` in javaScript); // true
+
+// 전역의 오염을 막아야한다.
 Object.prototype.nickName = '호랑이';
 
 // 객체의 속성(property) 포함 여부 확인 방법
@@ -25,10 +28,9 @@ Object.prototype.nickName = '호랑이';
 // console.log(` --- hasOwnProperty --- `);
 // * 내가 가지고 있는 속성만 정확하게 확인하는 방법
 // 객체 자신의 속성인지 확인하는 방법
-// - "자신의 속성을 가지고있는지 확인 방법"이 덮어쓰여질 수 있는 위험에 대처하는 안전한 방법은?
+// - "자신(own)의 속성(property)을 가지고(has)있는지 확인 방법"이 덮어쓰여질 수 있는 위험에 대처하는 안전한 방법은?
+
 // console.log( javaScript.hasOwnProperty('nickName') );
-// console.log( javaScript.hasOwnProperty('creator') );
-// console.log( javaScript.hasOwnProperty('toString') );
 
 // console.log(` --- Object.prototype --- `);
 // 본체의 hasOwnProperty 메서드를 .call 빌려씀

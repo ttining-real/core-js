@@ -74,6 +74,7 @@ for(let i = 0; i < l; i++) {
   // let arr = [...frontEndDev];
 
   // console.log(frontEndDev.pop());
+  // 제거된 값을 반환한다.
   console.log(frontEndDev.shift());
 }
 

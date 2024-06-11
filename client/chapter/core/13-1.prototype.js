@@ -88,10 +88,14 @@ function Tiger(name){
   }
 }
 
+Tiger.bark = function (sound) {
+  return sound
+}
+
 // 객체와 Tiger의 prototype을 연결해줘야하므로, Animal(함수)이 아닌 생성한 객체인 a1에게 연결해줘야함.
 // Tiger.prototype = Animal; // (X)
 // Tiger.prototype = new Animal(); // (O)
-Tiger.prototype = a1; // (O)
+// Tiger.prototype = a1; // (O)
 // Tiger.prototype = Object.create(Animal.prototype);
 // Tiger.prototype.constructor = Tiger
 
@@ -99,6 +103,7 @@ Tiger.prototype = a1; // (O)
 
 const 금강산호랑이 = new Tiger('금순이')
 
+// 
 
 /* 함수의 메서드 */
 // call : this 값을 명시적으로 설정

@@ -55,6 +55,7 @@ function checkBrowser(){
     case agent.indexOf('edg') > -1 :
       browserName = 'MS Edge'
     break;
+    // 크롬, 사파리 둘다 chrome이라고 나오기 때문에 조건 처리 하나 더 해줘야 함.
     case agent.indexOf('chrome') > -1 && !!window.chrome :
       browserName = 'Chrome'
     break;
@@ -75,32 +76,92 @@ function checkBrowser(){
 
 }
 
-
-
 checkBrowser() // chrome
 
 
-let lastIndexOf;
-let includes;
-let startsWith;
-let endsWith;
+
+// 뒤에서 부터 찾지만 앞의 인덱스 기준으로 반환해줌
+let lastIndexOf = message.lastIndexOf('s');
+console.log('lastIndexOf :',lastIndexOf);
 
 
-// 공백 잘라내기
-let trimLeft;
-let trimRight;
-let trim;
+let includes = message.includes('Less');
+console.log('includes :',includes);
+
+
+let startsWith = message.startsWith('less');
+console.log('startsWith :',startsWith)
+
+
+// 모든 문장에 마침표를 찍어야할 때 사용(안 찍혀있는 경우 / 찍혀있는 경우)
+let endsWith = message.endsWith('more.');
+console.log('endsWith :',endsWith)
+
+
+
+
+let str = '        a   b      c           d             ';
+
+// * 공백 잘라내기
+// trimLeft : 왼쪽 공백 제거 (이제는 잘 안 쓰임.)
+// 글을 왼/오로 읽을 수도 있지만, 상/하로 읽을 수도 있기 때문에
+// 이제는 Left/Right 개념을 잘 사용하지 않는다. => Start, End를 사용한다.
+let trimStart = str.trimStart();
+console.log('trimStart :',trimStart);
+
+let trimEnd = str.trimEnd();
+console.log('trimEnd :',trimEnd)
+
+let trim = str.trim();
+console.log('trim :',trim)
+
+// 중간 공백 잘라내기 (replaceAll / 정규 표현식)
+const replaceAll = str.replaceAll(' ', ''); // 모든 애들을 다 찾아서 좌변의 값을 우변의 값으로 변경
+console.log('replaceAll :',replaceAll);
+
+const replace = str.replace(/\s*/g, ''); // 모든 애들을 다 찾아서 좌변의 값을 우변의 값으로 변경
+console.log('replace :',replace)
+
+// 빈 문자 잘라내는 함수
+const trimText = s => s.replace(/\s*/g,'');
+
+trimText(str) // abcd
 
 
 // 텍스트 반복
-let repeat;
+let repeat = message.repeat(3);
+console.log('repeat :',repeat);
 
 
 // 대소문자 변환
-let toLowerCase;
-let toUpperCase;
+let toLowerCase = message.toLowerCase();
+console.log('toLowerCase :',toLowerCase);
 
+
+let toUpperCase = message.toUpperCase();
+console.log('toUpperCase :',toUpperCase);
+
+
+console.clear();
 
 // 텍스트 이름 변환 유틸리티 함수
-let toCamelCase;
-let toPascalCase;
+// let toCamelCase;
+// let toPascalCase;
+function toCamelCase(string) {
+  //          replace는 콜백함수를 제공해준다.
+  //           (공백 또는 - 또는 _ 찾기) + .(내가 찾은 것+바로 뒤에 알파벳 하나) /g (전역에서)
+  //                    걸러진 애들이   ($1) 여기에 들어옴 => {}
+  //                                           $1.trim() 공백 한번 더 제거 (혹시 모르니까)
+  //                                                   replace 한번 더 (알파벳 앞에 붙은 애들 찾아서 제거)
+  //                                                                           카멜 케이스 쓰려고 대문자로 바꿔줌
+  return string.replace(/(\s|-|_)+./g, ($1) => $1.trim().replace(/(-|_)+/, '').toUpperCase())
+}
+
+// 파스칼 케이스 : 카멜 케이스에서 첫 글자가 대문자
+function toPascalCase(string) {
+  // 카멜 케이스 함수를 한 번 돌려주고,
+  let name = toCamelCase(string);
+  // 첫 글자만 toUpperCase + 나머지 문자 접합해줌
+  return name[0].toUpperCase() + name.slice(1);
+}
+

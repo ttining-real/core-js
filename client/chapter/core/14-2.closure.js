@@ -1,31 +1,54 @@
 
-function earth(){
+// 클로저를 설명하기 위한 earth 함수
 
+/* normal function */
+function earth(){
+ 
   let water = true;
   let gravity = 10;
 
-  function tiger(){
+  // function tiger(){
+  // }
 
+  // return tiger;
+
+  // tiger를 어차피 반환할 거라면 바로 return하자!
+  
+  return function(value){
+    gravity = value;
+    
+    return [water,gravity]
   }
-
-
-  return tiger;
-
 }
 
 
-const ufo = earth();
+/* arrow function */
+// const earth = () => {
+ 
+//   let water = true;
+//   let gravity = 10;
+  
+//   return  (value) => {
+//     gravity = value;
 
-// 지구에 사는.. 호랑이가... 쫓겨났어요...
-// 그리고 호랑이는 ufo에 납치 당했어요....
+//     return [water,gravity]
+//   }
+// }
 
-const button = document.querySelector('button');
+
+const ufo = earth()
+
+// const ufo2 = earth()
+
+ufo(-10)
+
 
 
 
 /* -------------------------------------------------------------------------- */
 /*      button type="button">누르지마!</button> 에 대한 이벤트 리스너 함수       */
 /* -------------------------------------------------------------------------- */
+const button = document.querySelector('button');
 
 /* normal function */
 // function handleClick(){
@@ -50,7 +73,7 @@ const button = document.querySelector('button');
 
 
 
-// IIFE
+// IIFE 패턴 사용
 /* arrow function */
 const handleClick = (() => {
 
@@ -73,6 +96,11 @@ const handleClick = (() => {
 
 button.addEventListener('click',handleClick)
 
+
+
+// 함수는 값 => 어디든 들어갈 수 있습니다. 
+
+// 함수 표현식 
 
 // react useState라는 hook.,,과 비슷하게 설계해보았습니다..~
 // hook의 특징 use라는 단어가 앞에 붙음

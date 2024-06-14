@@ -20,6 +20,8 @@ var a = 10;
 console.log(a);
 
 
+
+
 // 선언하기 전 사용할 수 있는 var
 
 console.log(c);

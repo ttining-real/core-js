@@ -15,6 +15,7 @@ let memoizedObject = {
   name: '메모리에 기억된 객체',
 };
 
+
 memoizedObject = null;
 
 // memoizedObject가 참조한 데이터를 메모리 상에서 제거하도록 코드를 작성해봅니다.

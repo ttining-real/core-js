@@ -6,11 +6,13 @@
 // * iterable   : 반복 가능한
 
 // for ... of => iterable 요소만 사용 가능
+
 // string, array ...
 
 // 1. 순서 (index)가 있다.
 // 2. []
 // 3. length
+
 
 // 유사배열
 const arrayLike = {
@@ -28,6 +30,12 @@ const arrayLike = {
 // for(let value of arrayLike) {
 //   console.log(value); // 이터러블한 요소가 아니기 때문에 타입 에러가 나옴.
 // }
+
+
+
+
+
+
 
 const languages = [
   {
@@ -57,20 +65,26 @@ const languages = [
 ];
 
 // for ~ of 문
-// - 특정 조건에서 건너띄기
-// - 특정 조건에서 중단하기
+// - 특정 조건에서 건너띄기 (Java 문자 포함시) continue
+// - 특정 조건에서 중단하기 break
+
 for (let value of languages) {
+
   let name = value.name;
 
   // console.table(name);
   
-  if(name.includes('Java') && name.length < 5) continue // Java 텍스트 들어간 거 다 걸러줌
-  // if(name.includes('Java') && name.length < 5) break // JavaScript만 나옴
+  // if(name.includes('Java') && name.length < 5) continue // Java 텍스트 들어간 거 다 걸러줌
+  if(name.includes('Java') && name.length < 5) break // JavaScript만 나옴
 
   // console.table(value);
-
-
 }
+
+
+
+
+
+
 
 const randomUser = {
   gender: 'female',
@@ -119,9 +133,11 @@ const randomUser = {
 // arrayLike 배열로 만들기
 // 객체 => 배열 for ... of
 
+
 // Object.keys() : 객체들의 키를 모아 하나의 '배열로 반환'
 // Object.value() : 객체들의 값을 모아 하나의 '배열로 반환'
 // Object.entrise() : 객체의 키와 값을 하나의 쌍으로 만들고 '배열로 반환'
+
 const keys = Object.keys(arrayLike);
 const values = Object.keys(arrayLike);
 const entries = Object.entries(arrayLike);
@@ -137,18 +153,20 @@ const entries = Object.entries(arrayLike);
 // }
 
 for (let keyValue of entries) {
-  let key = keyValue[0];
-  let value = keyValue[1];
+  // let key = keyValue[0];
+  // let value = keyValue[1];
 }
 
 
 
 Object.prototype.nickName = 'tiger';
 
+
 // has, is가 붙은 함수는 대개 반환하는 값이 Boolean값이다.
 function hasProperty(obj,key){
   return Object.prototype.hasOwnProperty.call(obj,key)
 }
+
 
 console.time();
 
@@ -185,6 +203,10 @@ for(let key in randomUser){
     }
   }
 }
+
+// 재귀 함수
+
+
 
 // 조상까지 찾지 않음
 // 딱 내가 가지고 있는 것들만 찾아낸다.

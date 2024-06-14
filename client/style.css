@@ -36,3 +36,35 @@ button {
   border-radius: 28px;
   background: #333;
 }
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 16px;
+  margin: 0;
+  padding: 8px;
+}
+
+.userCard {
+  border: 1px solid black;
+  padding: 1rem;
+
+  .contents {
+    flex-flow: column nowrap;
+    gap: 8px;
+  }
+  .contents > li {
+  }
+
+  & img {
+    width: 100px;
+    height: 100px;
+    background-color: gray;
+  }
+
+  .strong {
+    font-weight: bold;
+    color: white;
+  }
+}

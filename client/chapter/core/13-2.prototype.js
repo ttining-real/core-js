@@ -10,6 +10,7 @@
 // 2. 생성자 함수의 상속
 // 3. 생성자 함수 모던 방식 Class
 
+
 class Animal {
   // 클래스 filled(?) 값이 변경되지 않는다면 이렇게도 사용이 된다.
   legs = 4
@@ -32,13 +33,16 @@ class Animal {
 
 const a = new Animal('포동이');
 
+
+
+
 // Animal에서부터 확장을 시켜서 Tiger라는 클래스를 만든다.
 class Tiger extends Animal {
 
   static options = {
-    version: '1.0.0',
-    company: '',
-    ceo: ''
+    version:'1.0.0',
+    company:'8b-studio',
+    ceo:'심선범'
   }
 
   constructor(name){ // constructor를 생략하는 것도 가능하다. (가져올 필요가 없다면)
@@ -46,21 +50,56 @@ class Tiger extends Animal {
     this.pattern = '호랑이무늬'
   }
 
-  static bark(sound){
-    return sound + ''
+  static bark(sound){ // 스태틱 메서드 정의
+    return sound + '🐯'
   }
 
-  hunt(target){
+  hunt(target){ // 인스턴스 메서드 정의
     return `${target}에게 조용히 접근한다.`
   }
 }
 
+
 const 호랑이 = new Tiger('호돌이');
 
 
-// Model (데이터)
-// View (랜더링)
+
+
+class Array extends Object{
+  
+  // constructor(){
+
+  // }
+
+  forEach(callback,arg){
+
+  }
+
+  reduce(){
+
+  }
+  map(){
+
+  }
+
+  static isArray(){
+
+  }
+
+  static from(){
+
+  }
+}
+
+new Array()
+
+
+
+
+// Model   (데이터)
+// View    (랜더링)
 // Control (이벤트)
+
 
 class Todo {
 
@@ -123,7 +162,6 @@ class Todo {
   }
 
 }
-
 
 
 

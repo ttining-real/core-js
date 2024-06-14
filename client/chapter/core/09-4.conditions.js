@@ -4,7 +4,7 @@
 /* Nullish Coalescing Operator  */
 /* ---------------------------- */
 
-let emailAddress;
+let emailAddress = 'ttining.lion@gmail.com';
 let receivedEmailAddress;
 
 if (emailAddress === undefined || emailAddress === null) {
@@ -15,13 +15,11 @@ if (emailAddress === undefined || emailAddress === null) {
 
 // 3항 연산자 (ternary) 를 사용한 식으로 변경합니다.
 
-receivedEmailAddress = (emailAddress === undefined || emailAddress === null) ? 'user@company.io' : emailAddress;
-
-
+// condition ? value1 : value2
+receivedEmailAddress = (emailAddress === undefined || emailAddress === null) ? 'user@company.io' : emailAddress
 
 // 위 조건 처리문을 nullish 병합 연산자를 사용한 식으로 변경합니다.
 receivedEmailAddress = emailAddress ?? 'user@company.io';
-
 receivedEmailAddress = emailAddress || 'user@company.io';
 
 
@@ -33,9 +31,6 @@ receivedEmailAddress = emailAddress || 'user@company.io';
 const WIDTH = '10px';
 const isActive = false;
 
-console.log( null || WIDTH );
-console.log( null ?? WIDTH );
-
 console.log( 0 || WIDTH );
 console.log( 0 ?? WIDTH );
 
@@ -46,9 +41,8 @@ console.log( isActive || WIDTH );
 console.log( isActive ?? WIDTH );
 
 console.log( '' || WIDTH );
-console.log( '' ?? WIDTH );
+console.log( '' ?? WIDTH ); // 빈 문자열은 null이나 undefined가 아니기 때문에 빈 문자열이 나옴
 
-// a ||= b : a가 false일 때 b의 값을 a에 할당
-// a &&= b : a가 true일 때 b의 값을 a에 할당
-// a ??= b : a가 undefined, null일 때, b의 값을 a에 할당
-
+// a ||= b a가 false일때 b 값을 a에 할당
+// a &&= b a가 true일때 b 값을 a에 할당
+// a ??= b a가 undefined,null일때 b 값을 a에 할당

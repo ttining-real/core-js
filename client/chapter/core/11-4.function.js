@@ -28,6 +28,7 @@ function pow( x, n ) {
 pow(2, 3);
 
 
+
 // factorial 함수를 재귀 호출 방식으로 작성
 // 참고: https://bit.ly/factorial-util
 // - 팩토리얼 = 그 수보다 작거나 같은 모든 양의 정수의 곱
@@ -95,7 +96,10 @@ function fibonacci(n) {
 // 메모이제이션을 사용한 fibonacci 함수를 작성해보세요.
 // 참고: https://bit.ly/memoiz
 // - 동일 계산 반복 시, 이전 계산 값을 메모리에 저장하여 실행 속도를 높이는 방법
+
+
 // * 피보나치 재귀함수를 개선해보자!
+
 
 // const cache = {}
 
@@ -113,6 +117,7 @@ const memoFibo = (n)=>{
 
 
 memoFibo.cache = {}
+
 
 
 // 회사 부서 팀원들의 월급 총 합을 구해보세요.
@@ -163,11 +168,11 @@ const SocialPartiners = {
 function sumSalaries(department){
   
   if(Array.isArray(department)){
-    return department.reduce((acc,cur)=> acc + cur.salary,0)
-  }else{
+    return department.reduce((acc,cur) => acc + cur.salary, 0)
+  } else {
 
     let sum = 0;
-    for(let sub of Object.values(department)){
+    for(let sub of Object.values(department)) {
       sum += sumSalaries(sub)
     }
     return sum;
@@ -175,9 +180,10 @@ function sumSalaries(department){
 }
 
 
-function isArray(data){
+function isArray(data) {
   return Array.isArray(data)
 }
+
 
 
 const randomUser = {
@@ -216,26 +222,26 @@ const randomUser = {
 };
 
 
-function print(data){
+function print(data) {
 
-  if(Object.prototype.toString.call(data).slice(8,-1).toLowerCase() === 'object'){
-    for(let keyValue of Object.entries(data)){
+  if(Object.prototype.toString.call(data).slice(8,-1).toLowerCase() === 'object') {
+    for(let keyValue of Object.entries(data)) {
       let key = keyValue[0]
       let value = keyValue[1]
   
       if(typeof value === 'object' || isArray(value)){
         print(value)
-      }else{
+      } else {
         console.log(key,' : ' ,value);
       }
     }
   }
 
-  if(isArray(data)){
+  if(isArray(data)) {
     data.forEach((value,index)=>{
-      if(typeof value === 'object' || isArray(value)){
+      if(typeof value === 'object' || isArray(value)) {
         print(value)
-      }else{
+      } else {
         console.log(index,' : ' ,value);
       }
     })

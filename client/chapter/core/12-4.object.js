@@ -27,6 +27,13 @@ const shopOrder = {
 
 // 일반 함수 (문/식)의 this vs. 화살표 함수 식의 this
 
+// type Item = {
+//   id:string,
+//   text:string,
+//   link:string
+// }
+
+
 const navigationMenu = {
   name: '글로벌 내비게이션',
   items: [
@@ -36,10 +43,6 @@ const navigationMenu = {
   getItem(index) {
     return this.items[index];
   },
-  // addItem: (newItem) => {
-  //   // window.items => undefined
-  //   this.items.push(newItem);
-  // },
   addItem(newItem) {
     this.items.push(newItem);
   },

@@ -5,7 +5,6 @@
 // Array.isArray
 
 // * 배열인지 체크하는 함수
-// * normal
 // function isArray(data) {
 //   return Object.prototype.toString.call(data).slice(8, -1).toLowerCase() === 'array'
 // }
@@ -15,19 +14,21 @@
 // function typeOf(data) {
 //   return Object.prototype.toString.call(data).slice(8, -1).toLowerCase()
 // }
-const typeOf = data => Object.prototype.toString.call(data).slice(8,-1).toLowerCase()
+
+
+// const typeOf = data => Object.prototype.toString.call(data).slice(8,-1).toLowerCase()
 
 // * arrow
-const isArray = data => typeOf(data) === 'array'
-const isNull = data => typeOf(data) === 'null'
-const isNumber = data => typeOf(data) === 'number'
+// const isArray = data => typeOf(data) === 'array'
+// const isNull = data => typeOf(data) === 'null'
+// const isNumber = data => typeOf(data) === 'number'
 // const isObject = data => typeOf(data) === 'object'
-const isSymbol = data => typeOf(data) === 'symbol'
-const isBigInt = data => typeOf(data) === 'bigint'
-const isFunction = data => typeOf(data) === 'function'
-const isMath = data => typeOf(data) === 'math'
-const isString = data => typeOf(data) === 'string'
-const isUndefined = data => typeOf(data) === 'undefined'
+// const isSymbol = data => typeOf(data) === 'symbol'
+// const isBigInt = data => typeOf(data) === 'bigint'
+// const isFunction = data => typeOf(data) === 'function'
+// const isMath = data => typeOf(data) === 'math'
+// const isString = data => typeOf(data) === 'string'
+// const isUndefined = data => typeOf(data) === 'undefined'
 
 
 // isArray(data);
@@ -72,11 +73,12 @@ const people = [
 
 /* 요소 순환 ---------------------------- */
 
+// forEach
 const job = people.forEach((user)=>{
   console.log(user.job);
 });
 
-// forEach
+
 
 // forEach 어디다 써요?
 // const first = document.querySelector('.first');
@@ -95,6 +97,7 @@ const job = people.forEach((user)=>{
 
 
 const span = document.querySelectorAll('span');
+
 span.forEach((tag)=>{
   //                           arrow function 사용하면 this를 못 찾음
   tag.addEventListener('click', function(){
@@ -103,12 +106,7 @@ span.forEach((tag)=>{
   })
 })
 
-// event delegation (이벤트 위임) (부모에게 이벤트를 걸고 자신이 그 이벤트를 사용할 수 있게 하는 것)
-
-
-
-
-
+// event delegation (이벤트 위임) : 부모에게 이벤트를 걸고 자신이 그 이벤트를 사용할 수 있게 하는 것
 
 
 
@@ -158,33 +156,30 @@ function compare({age:a}, {age:b}){
 
 
 
-
-
-
-
-
 /* 새로운 배열 반환 ------------------------ */
 
 // concat
 // slice
 
-// toReversed
-// const toReversed = people.toReversed()
-
-
 // toSpliced
-const toSpliced = people.toSpliced(0,2)
+const toSpliced = people.toSpliced(0,2);
 
 
 // toSorted
-const toSorted = people.toSorted(compare)
+const toSorted = people.toSorted(compare);
+
+// toReversed
+const toReversed = people.toReversed();
 
 
-// map
+
+// * map
+
 // 이름만 담은 배열 반환
 // const nameList = people.map((user)=>{
 //   return user.name
 // });
+
 const nameList = people.map(u => u.name);
 
 // 현재 나이에 + 2 배열 반환
@@ -218,11 +213,6 @@ cardTag.forEach(tag => ul.insertAdjacentHTML('beforeend',tag))
 
 
 
-
-
-
-
-
 /* 요소 포함 여부 확인 ---------------------- */
 
 // indexOf
@@ -232,15 +222,11 @@ cardTag.forEach(tag => ul.insertAdjacentHTML('beforeend',tag))
 
 
 
-
-
-
 /* 요소 찾기 ------------------------------ */
 
 // find : 제일 처음 찾은 대상만 반환함 (단일대상 반환)
 
 const 황 = people.find((item) => {
-  // console.log(item);
   return item.name === '황선우'
 })
 
@@ -249,24 +235,14 @@ const 황 = people.find((item) => {
 
 
 
-
-
-
-
-
 /* 요소 걸러내기 --------------------------- */
 
-
-// filter : 배열을 반환함
+// * filter : 배열을 반환함
 const filter = people.filter((item) => {
   return item.age > 20
 })
 
-// console.log(filter);
-
-
-
-
+// console.log(...filter);
 
 
 
@@ -274,11 +250,13 @@ const filter = people.filter((item) => {
 /* 요소별 리듀서(reducer) 실행 -------------- */
 
 // reduce
+
 // const reduce = people.reduce((acc, cur) => {
 //   return acc + cur.age
 // }, 0)
 
 const reduce = people.reduce((acc, cur) => acc + cur.age, 0)
+
 
 const template = people.reduce((acc, cur) => {
   return acc + `<li class="userCard">${cur.name} : ${cur.age}</li>` 
@@ -294,20 +272,13 @@ ul.insertAdjacentHTML('beforeend', template);
 
 
 
-
-
-
-
-
 /* string ←→ array 변환 ------------------ */
 
-// split (문자를 배열로)
 const str = '유진 정민 현주 재명';
 
+// split (문자를 배열로)
 const stringToArray = str.split(' ');
-
 console.log(stringToArray);
-
 
 
 // join (배열을 문자로)
@@ -315,11 +286,15 @@ const arrayToString = stringToArray.join('-');
 console.log(arrayToString);
 
 
-
-
-
-
-
+// const user = {
+//   grades:[1,2,3],
+//   sayHi(){
+    
+//     this.grades.forEach(()=>{
+//       this
+//     })
+//   }
+// }
 
 
 const products = [
@@ -331,11 +306,8 @@ const products = [
 ];
 
 
-
-
 /* forEach */
-[1,2,3].forEach(()=>{})
-
+// [1,2,3].forEach(()=>{})
 
 const forEach = (f,i) => {
   for(const a of i) f(a)
@@ -374,7 +346,7 @@ console.log( map(n => n + 2, [1,2,3]) );
 const _filter = (f,i) => {
   let result = [];
   
-  for(const a of [1,2,3,4,5]){
+  for(const a of i){
     if(f(a)) result.push(a);
   }
 
@@ -388,14 +360,13 @@ _filter(n => n > 3,[1,2,3,4,5])
 /* reduce */
 
 const _reduce = (f, acc, i) => {
-  let total = 0;
+  // let total = 0;
   
   if(!i) {
-    // i = acc;
-    // acc = i.shift()
-
-    i = acc[Symbol.iterator]();
-    acc = i.next().value;
+    i = acc;
+    acc = i.shift()
+    // i = acc[Symbol.iterator]();
+    // acc = i.next().value;
   }
 
   for(const a of i){
@@ -416,9 +387,12 @@ const add = (a,b) => a + b;
 console.log(_reduce((t, p) => t + p.price, 0, products));
 
 
-console.log(
+console.log( 
+
   _reduce(
     add,
-    map(p => p.price, products, _filter(p => p.price < 10000, products))
+    map(p => p.price,
+      _filter(p => p.price < 10000,products)),
   )
+  
 );

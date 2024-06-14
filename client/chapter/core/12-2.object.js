@@ -58,6 +58,7 @@ const copiedObject = (obj)=> Object.assign({}, obj)
 // console.log(copiedObject);
 
 
+
 // 객체 병합(합성)
 const cssMapA = {
   color: '#4b004b',
@@ -72,7 +73,9 @@ const cssMapB = {
   color: '#3f9e97',
 };
 
-// 같은 값이 있으면 뒤에 오는 것이 덮어쓴다 (...cssMapB)
+// mixin
+
+//                                 같은 값이 있으면 뒤에 오는 것이 덮어쓴다 (...cssMapB)
 // let combinedCssMap = Object.assign({}, cssMapA, cssMapB);
 let combinedCssMap = {...cssMapA, ...cssMapB} // 전개 합성
 
@@ -94,35 +97,22 @@ const containerStyles = {
 
 
 // ...containerStyles로 깊은 복사하는 방법 (1depth밖에 안됨)
-// let copiedContainerStyles = {
-//   ...containerStyles,
-//   ['max-width']:{
-//     ...containerStyles['max-width']
-//   }
-// };
+let copiedContainerStyles = {
+  ...containerStyles,
+  ['max-width']:{
+    ...containerStyles['max-width']
+  }
+};
+
+// let copiedContainerStyles = cloneDeep(containerStyles);
 
 
-// // 1. 깊은 복사 유틸리티 함수
-// function cloneDeep(object) {
-//   // fromEntries : 배열을 객체로 만들어줌
-//   return Object.fromEntries(
-//     Object.entries(object).map(([key, value]) => {
-//       let type = typeof value;
-//       if (value && type === 'object') {
-//         value = cloneDeep(value);
-//       }
-//       return [key, value];
-//     })
-//   );
-// }
 
-
-let copiedContainerStyles = cloneDeep(containerStyles);
 
 
 // 1. 깊은 복사 유틸리티 함수
 function cloneDeep(object) {
-  // fromEntries : 배열을 객체로 만들어줌
+  //            fromEntries : 배열을 객체로 만들어줌
   return Object.fromEntries(
     Object.entries(object).map(([key, value]) => {
       let type = typeof value;
@@ -135,14 +125,9 @@ function cloneDeep(object) {
 }
 
 
-// 2. Lodash 라이브러리 활용
-// lodash 라이브러리를 사용해서 깊은 복사를 할 수도 있다.
-// _.cloneDeep(value)
-// 참고: https://lodash.com/docs/4.17.15#cloneDeep
-// CDN : https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js
-
 
 console.clear();
+
 
 const defaultOptions = {
   method:'GET',
@@ -158,7 +143,7 @@ const defaultOptions = {
 function ajax(options){
 
   // 객체를 합성하고 새로운 객체를 생성하는 것이 안전하다.(기존 객체가 훼손될 일이 없다.)
-  // const newOptions = {
+  // const newOptions = {...defaultOptions, ...options,}
   const {method, headers, body} = { // 받는 즉시 합성
     ...defaultOptions,
     ...options,
@@ -169,7 +154,7 @@ function ajax(options){
 
   }
 
-  // const {method, headers, body} = newOptions;
+  // const {method, headers, body} = mixin;
 
 
   // console.log(newOptions);
@@ -181,7 +166,21 @@ function ajax(options){
 }
 
 // 왜 객체로 전달하는지? 순서가 상관 없기 때문
+// ajax({
+//   method: 'POST',
+//   body: '데이터'
+// })
 ajax({
-  method: 'POST',
-  body: '데이터'
+  body:'data',
+  headers:{
+    'content':'text'
+  }
 })
+
+
+
+// 2. Lodash 라이브러리 활용
+// lodash 라이브러리를 사용해서 깊은 복사를 할 수도 있다.
+// _.cloneDeep(value)
+// 참고: https://lodash.com/docs/4.17.15#cloneDeep
+// CDN : https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js

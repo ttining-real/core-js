@@ -40,12 +40,10 @@ portableFan.photos?.animate
 
 // 메서드가 있는지 없는지 불확실할 때 ?. 사용 // 나중에는 try catch를 사용한다.
 const fullName = portableFan.getFullName?.();
+
 console.log(fullName);
 
 // 객체의 프로퍼티 접근 시, 옵셔널 체이닝을 사용해봅니다.
-
-
-
 
 
 
@@ -59,15 +57,15 @@ console.log(fullName);
 
 // console.log(1);
 // console.log(2);
-// // console.log(3); // 비동기 처리 해보기
+// console.log(3); // 비동기 처리 해보기
 
 // setTimeout : 한 번만 실행해주는 함수
-// // setTimeout(function(){ // 제일 쉽게 접근할 수 있는 비동기 setTimeout
-// //   console.log(3);
-// // },1000) 
+// setTimeout(function(){ // 제일 쉽게 접근할 수 있는 비동기 setTimeout
+//   console.log(3);
+// },1000) 
 
-// // 자바스크립트는 싱글 스레드 환경이기 때문에
-// // 이 시간을 보장하기 위해서는 async await을 사용한다.
+// 자바스크립트는 싱글 스레드 환경이기 때문에
+// 이 시간을 보장하기 위해서는 async await을 사용한다.
 
 // function print(){
 //   console.log(3);
@@ -76,8 +74,14 @@ console.log(fullName);
 // setTimeout(print, 1000)
 
 
-// console.log(4);
-// console.log(5);
+
+// function fibonacci(n){
+//   if(n <= 0) return 0;
+//   if(n <= 2) return 1;
+//   return fibonacci(n-1) + fibonacci(n-2)
+// }
+
+// fibonacci(45)
 
 const button = document.querySelector('.my-button');
 
@@ -109,20 +113,22 @@ button?.addEventListener('click',()=>{
 })
 
 
+// 연산 오래걸리는 작업
+
 // setInterval : 일정 시간동안 주기적으로 실행해주는 함수
 
 let count = 0;
 
-// const id2 = setInterval(()=>{
-//   console.log(++count);
+const id2 = setInterval(()=>{
+  console.log(++count);
 
-//   document.querySelector('.first').style.transform = `translateY(${count}px) rotate(${count * 10}deg)`
+  document.querySelector('.second').style.transform = `translateY(${count}px) rotate(${count * 10}deg)`
 
-//   if(count >= 250){
-//     clearInterval(id2)
-//   }
+  if(count >= 250){
+    clearInterval(id2)
+  }
 
-// }, 10)
+}, 10)
 
 // 멈춰주기
 // clearTimeout(id2)

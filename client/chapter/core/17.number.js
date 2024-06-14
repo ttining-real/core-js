@@ -63,9 +63,15 @@ console.log('min :',min);
 let pow = Math.pow(2,53);
 console.log('pow :',pow)
 
-Math.sin()
-Math.cos()
-Math.tan()
+// Math.sin()
+// Math.cos()
+// Math.tan()
+
+let count = 0;
+// setInterval(() => {
+  // console.log( Math.sin(++count) );
+// }, 10);
+
 
 
 // 최소, 최대 값 사이 난수 반환 함수

@@ -3,8 +3,13 @@
 /* --------- */
 
 /* global isObject */
+const html = /* html */ `
+  <h1>title</h1>
+  <div class="first">
+    hello
+  </div>
+`;
 
-// console.log(isObject);
 
 /* Primitives vs. Object --------- */
 
@@ -50,7 +55,7 @@ authUser = {
   name: 'ttining',
   email: 'ttining.real@gmail.com',
   isSignIn: false,
-  permission: 'paid'
+  permission: 'paid', // paid | free
 }
 
 
@@ -83,13 +88,14 @@ console.log( 'uid' in authUser );
 for(let key in authUser) {
   // console.log(key); // nickName까지 나옴
   
+  // 정확하게 쓰기 위해서 hasOwnProperty를 사용한다.
   if({}.hasOwnProperty.call(authUser, key)) {
     console.log(key);
     console.log(authUser[key]); // . 점 표기법은 안나옴
   }
 }
 
-
+// static method와 instance method
 // 객체의 key만을 모아서 배열을 반환하는 메서드 : Object.keys()
 const keyList = Object.keys(authUser);
 
@@ -115,7 +121,7 @@ function getPropertiesList(obj) {
   return result;
 }
 
-getPropertiesList(authUser);
+getPropertiesList(authUser); // ['uid', 'name', 'email', 'isSignIn', 'permission']
 
 
 console.clear();
@@ -146,11 +152,8 @@ deleteProperty(authUser,'name') // undefined
 
 
 
-
-
-
 // 계산된 프로퍼티 (computed property)
-let calculateProperty = 'phone'; // phone | tel
+let calculateProperty = 'tel'; // phone | tel
 
 function createUser(name, age, phone){
   return{
@@ -161,20 +164,15 @@ function createUser(name, age, phone){
 }
 
 
-// authentication <-> authorization 차이점
+// authentication ( authentication <-> authorization 차이점 )
 
-// 단축 프로퍼티
+// 단축 프로퍼티 (shorthand property)
 let name = '띠닝';
 let email = 'ttining.real@gmail.com';
 let authorization = 'Lv. 99';
 let isLogin = true;
 
-const student = {
-  name,
-  email,
-  authorization,
-  isLogin,
-}
+const student = { name, email, authorization, isLogin };
 
 
 // 프로퍼티 이름 제한
@@ -184,13 +182,13 @@ const student = {
 // 객체가 프로퍼티를 포함하는 지 유무를 반환하는 유틸리티 함수 isEmptyObject 작성
 function isEmptyObject(obj) {
   // return null;
-  return Object.keys(obj).length === 0
+  return Object.keys(obj).length === 0;
 }
 
 // const a ={}
 
 // isEmptyObject(a); // true
-// isEmptyObject({}); // true
+isEmptyObject({}); // true
 
 
 
@@ -198,32 +196,35 @@ function isEmptyObject(obj) {
 /* ★ 배열 구조 분해 할당  destructuring(파괴) assignments   */
 /* ------------------------------------------- */
 
-const arr = [10,100,1000,10_000];
+// 순서(order)를 바꿀 수 없음. 변수명 o
+
+const arr = [10, 100, 1000, 10_000];
+
+const [a0, a2, a3, a4, a5 = 999] = arr;
 
 // const a0 = arr[0];
 // const a1 = arr[1];
 // const a2 = arr[2];
 // const a3 = arr[3];
 
-const [a0, a1, a2, a3] = arr;
 // const [, a1, a2] = arr; // 안 쓰는 요소는 비워놔도 됨
 // const [a0, ... rest] = arr; // 나머지 파라미터 다 가져오는 것처럼 처리할 수 있음
 
-// 어마어마하게 편해졌당~
 // 무조건 배열의 길이와 같게 쓸 필요는 없다.
 // 배열을 분해한 아이템의 변수다 (= 더이상 배열이 아님)
 
-// * 특징
-// 순서(order)를 바꿀 수 없음.
 
 // Object.entries(authUser) // [ [key, value] [key, value] ]
+// Object.entries(authUser).filter(([key, value]) => {
+//   value
+// })
+
 
 // 배열 묶음의 껍데기를 한겹 벗겨줌
-// for(let keyValue of Object.entries(authUser)) {
-  
-//   // console.log(keyValue); // [key, value]
-//   // console.log(keyValue[0]); // key만 뽑아냄
-//   // console.log(keyValue[1]); // value만 뽑아냄
+// for(let keyValue of Object.entries(authUser)) {  
+//   console.log(keyValue); // [key, value]
+//   console.log(keyValue[0]); // key만 뽑아냄
+//   console.log(keyValue[1]); // value만 뽑아냄
 // }
 
 // 구조 분해해서 가져오기
@@ -231,155 +232,105 @@ for(let [key, value] of Object.entries(authUser)){
   console.log(key, value);
 }
 
-// const spanList = document.querySelectorAll('span');
+// [ [key, value], [key, value] ]
+
+// 닌자 코드
+
+// 구조 분해 할당 가능
+// const [first,second] = document.querySelectorAll('span');
 
 // const first = spanList[0];
 // const second = spanList[1];
-// 구조 분해 할당 가능
 
-const [first, second] = document.querySelectorAll('span');
+// const first = document.querySelector('.first');
+// const second = document.querySelector('.second');
+
+
 
 
 
 /* -------------------------------------------- */
 /* 객체 구조 분해 할당  destructuring assignments */
 /* --------------------------------------------- */
+// 순서를 고려하지 않음. key와 변수명이 동일해야 함. => 변수명 o (rename 가능)
+// key를 추가하고 기본 값을 설정할 수 있다.
 
-// const salaries = {
-//   함정민:95,
-//   지유진:110,
-//   이진용:15,
-//   한상학:300
-// }
-
-// // console.log( salaries.함정민 );
-
-// // const 이진용 = salaries.이진용;
-// // console.log(이진용);
-
-// // 순서를 고려하지 않음
-// // key로 구분하기 때문에 key와 변수명이 일치해야한다. => 변수명 rename 가능
-// // key를 추가하고 기본값을 설정할 수 있다.
-// const {함정민:함, 이진용:리, 지유진:지, 한상학:한, 장주원:장=500} = salaries;
-
-// console.log(함);
-// // console.log(장주원);
-// console.log(장);
-// // salaries에 추가되는 것은 아님
-// // 구조 분해를 할 때 새롭게 만들어서 할당을 해버린 것.
-
-// // function createUserObject(obj) {
-// function createUserObject({
-//   name,
-//   age,
-//   gender,
-//   job:j= '홈프로텍터'
-// } = {}) { // 값을 받음과 동시에 구조 분해 할당을 처리할 수 있다.
-
-//   // console.log(obj);
-
-//   // const name = obj.name;
-//   // const {name, age, gender, job = '홈프로텍터', ...rest} = obj; // 구조 분해 할당
-
-//   // 새로운 객체를 반환하는 함수
-//   return {
-//     name, // 단축 프로퍼티
-//     age,
-//     gender,
-//     job:j,
-//   }
-// }
-
-// // 순서가 중요해짐
-// // const person = createUserObject('ttining', 29, 'female', '백수');
-
-// const data = {
-//   name: 'ttining',
-//   age: 29,
-//   gender: 'female',
-//   // job: '백수'
-//   address: '서울시 구로구',
-//   tel: '010-926...'
-// }
-
-// const person = createUserObject( data );
-
-// 범쌤 코드
-/* -------------------------------------------- */
-/* 객체 구조 분해 할당  destructuring assignments    */
-/* --------------------------------------------- */
-
-// 순서를 고려하지 않음. key와 변수명이 동일해야 함. => 변수명 o 
-// 기본 값 사용 가능 
 const salaries = {
-  함정민:95,
-  지유진:110,
-  이진용:15,
-  한상학:300
-}
+  함정민: 95,
+  지유진: 110,
+  이진용: 15,
+  한상학: 300,
+};
 
+// salaries에 추가되는 것은 아님
+// 구조 분해를 할 때 새롭게 만들어서 할당을 해버린 것.
+const {
+  함정민: 함 = 100,
+  지유진: 지,
+  한상학: 한,
+  이진용: 리,
+  장주원: 장 = 500,
+} = salaries;
 
-const {함정민:함 = 100,지유진:지,한상학:한,이진용:리,장주원:장 = 500} = salaries;
 
 // const 이진용 = salaries.이진용;
 // const 지유진 = salaries.지유진;
 
-
-function sum(a){
-
-  return 1 + a
+function sum(a) {
+  return 1 + a;
 }
 
-sum()
+sum();
+
 
 
 
 function createUserObject({
-  name = '철수',
+  name,
   age,
   gender,
-  job:j = '홈프로텍터'
-} = {}){
+  job:j= '홈프로텍터'
+} = {}) { // 값을 받음과 동시에 구조 분해 할당을 처리할 수 있다.
 
-  
-  
-  // const {name,age,gender,job} = obj;
+  // console.log(obj);
 
+  // const name = obj.name;
+  // const {name, age, gender, job = '홈프로텍터', ...rest} = obj; // 구조 분해 할당
 
-  return { name, age, gender, job:j }
-
+  // 새로운 객체를 반환하는 함수
+  return { name, age, gender, job:j }; // 단축 프로퍼티
 }
 
+
+// 순서가 중요해짐
+// const person = createUserObject('ttining', 29, 'female', '백수');
 
 const data = {
-  name:'beom',
-  age:40,
-  gender:'male',
-  job:'developer',
-  address:'서울시 중랑구',
-  tel:'010-716....'
-} 
-
-const person = createUserObject(data);
-
-
-
-
-const { 
-  userName, 
-  age, 
-  gender, 
-  job, 
-  address = '서울시 중랑구', 
-  tel
- } = {
-  userName:'beom',
-  age:40,
-  gender:'male',
-  job:'developer',
-  address:'서울시 중랑구',
-  tel:'010-716....'
+  name: 'ttining',
+  age: 29,
+  gender: 'female',
+  // job: '백수'
+  address: '서울시 구로구',
+  tel: '010-926...'
 }
+
+const person = createUserObject( data );
+
+const {
+  userName,
+  age,
+  gender,
+  job,
+  address = '서울시 구로구',
+  tel,
+} = {
+  userName: 'ttining',
+  age: 29,
+  gender: 'female',
+  // job: 'developer',
+  address: '서울시 구로구',
+  tel: '010-926....',
+};
 
 // const {acos} = Math;
 

@@ -20,6 +20,9 @@ console.log('extractCharacter :',extractCharacter);
 // mutable // 변경 가능한
 // mutant // 돌연변이
 
+// const a = {...immutable} 
+
+
 // 문자열 중간 글자를 바꾸는 건 불가능 
 // (기존 문자 변경 대신, 새로운 문자를 생성해야 함)
 let immutableChangeCharacter = 'P' + message.slice(1);
@@ -55,7 +58,6 @@ function checkBrowser(){
     case agent.indexOf('edg') > -1 :
       browserName = 'MS Edge'
     break;
-    // 크롬, 사파리 둘다 chrome이라고 나오기 때문에 조건 처리 하나 더 해줘야 함.
     case agent.indexOf('chrome') > -1 && !!window.chrome :
       browserName = 'Chrome'
     break;
@@ -121,6 +123,13 @@ console.log('replaceAll :',replaceAll);
 
 const replace = str.replace(/\s*/g, ''); // 모든 애들을 다 찾아서 좌변의 값을 우변의 값으로 변경
 console.log('replace :',replace)
+
+// function trimText(string){
+  
+//   return string.replace(/\s*/g,'');
+
+// }
+
 
 // 빈 문자 잘라내는 함수
 const trimText = s => s.replace(/\s*/g,'');

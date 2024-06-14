@@ -13,28 +13,29 @@ function sum(a,b){
   return a + b
 }
 
-const value = sum  // 함수 자체를 value 변수에 전달
+const value = sum; // 함수 자체를 value 변수에 전달
 // console.log( value(1,2) ); // 호출이 가능해짐
+
 
 
 // 함수는 태어난 환경을 기억합니다.
 
-// function first() {
-//   let x = 10;
-
-//   function second(num) {
-//     let y = 20;
-
-//     x = num;
-
-//     return x + y;
-//   }
-
-//   return second;
-// }
-
-// 위에 함수 화살표 함수로 바꾸기
+/* normal function */
 function first(){
+
+  let x = 10;
+
+  return function (num){
+    let y = 20;
+    x = num;
+    return x + y;
+  }
+
+}
+
+
+/* arrow function */
+const first = () => {
 
   let x = 10;
 
@@ -47,30 +48,28 @@ function first(){
 }
 
 
-
 // const result = first();
 
 
+
 // counter 함수
-// function counter(){
-//   let count = 0;
 
-//   function c(){
-//     return ++count
-//   }
+/* normal function */
+function counter () {
+  let count = 0;
+  return function (){
+    return ++count
+  }
+}
 
-//   return c
-// }
 
-
-// counter 함수를 arrow function으로
+/* arrow function  */
 const counter = () => {
   let count = 0;
   return () => ++count
 }
 
 // counter()
-
 
 // const counter = (count) => () => ++count
 
@@ -88,15 +87,13 @@ const counter = () => {
 
 
 
-
+// 고차 함수
 function multi(x){
   
   return function (y){
     return x * y
   }
 }
-
-
 
 const double = multi(2);
 const triple = multi(3);

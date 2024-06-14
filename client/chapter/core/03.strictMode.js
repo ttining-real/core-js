@@ -12,4 +12,5 @@ const JUJEOB = '안지인 넌 뭐랄까.. 마치 베를린 같아. 왜냐하면 
 console.log(JUJEOB);
 
 // #2
-console.log(this);
+// console.log(this);
+console.log(global); // ERROR

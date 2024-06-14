@@ -23,43 +23,55 @@ let resultZ = calculateTotal(9000, -2500, 5000, 11900);
 // const sum2 = function (...args) {}
 
 
+
+
 // 함수 선언 → 화살표 함수 (표현)식
-//                  rest parameter
-let calcAllMoney = (...args) => {
+//                   rest parameter
+let calcAllMoney  = (...rest) => {
   
   let total = 0;
 
-  // * for 문
-  // for(i = 0; i < args.length; i++){
-  //   total += args[i];
+  // * for 문 
+  // for(let i = 0; i < rest.length; i++){
+  //   total += rest[i];
   // }
 
-  // * for of 문
-  // for(let value of args) {
+
+  // * for...of 문
+  // for(let value of rest){
   //   total += value;
   // }
 
-  // * forEach 문 => arrow function
-  // args.forEach(function (item) {
+  // * forEach  => arrow function
+  // rest.forEach(function(item){
   //   total += item;
-  // });
+  // })
 
-  // args.forEach(item => total += item)
+  // rest.forEach(item => total += item)
+
 
   // * reduce => arrow function
-  // const result = args.reduce(function(acc, cur){
+
+  // const result = rest.reduce(function(acc,cur){
   //   return acc + cur
-  // }, 0)
+  // },0)
 
-  return args.reduce((acc, cur) => acc + cur, 0);
+  
+  return rest.reduce((acc,cur) => acc + cur,0);
 
-  // return total;
 };
 
-const calc = (...args) => args.reduce((acc, cur) => acc + cur, 0);
+
+
+
+
+const calc = (...rest) => rest.reduce((acc, cur) => acc + cur, 0);
 
 const result = calcAllMoney(1000, 5000, 4500, 13000);
+
 console.log(result);
+
+
 
 // 화살표 함수와 this
 
@@ -73,12 +85,16 @@ function create(nickName, number){
 
 create('ttining', 5);
 
-// 함수의 두 가지 얼굴 - 키-값으로 입력하면 객체를 내보내준다.
-// 일반 함수(normal function) / 생성자 함수(constructor function)
+
+
+
+// 자바스크립트 함수의 양면의 얼굴  => 일반 함수(normal function) / 생성자 함수(constructor function) 
+// 키-값으로 입력하면 객체를 내보내준다.
 
 function Button2() {
 
 }
+
 
 // 생성자로만 사용하세요
 const Button = (text) => {
@@ -88,9 +104,12 @@ const Button = (text) => {
 
 }
 
+
 class Button3{}
 
+
 new Button3()
+
 
 // const a = Button('more')
 // const b = new Button('more')
@@ -114,8 +133,8 @@ new Button3()
 // - 메서드 안의 함수를 작성해야할 때 // 내 상위 this를 가져오기 때문에
 
 // * 정리
-// 객체에 메서드를 정의해야한다 => 일반함수 사용..
-// 메서드 안에 함수를 작성해야할때  => 화살표 함수 사용..
+// 객체에 메서드를 정의해야한다 => 일반함수 사용
+// 메서드 안에 함수를 작성해야할때  => 화살표 함수 사용
 
 
 const user = {
@@ -123,20 +142,26 @@ const user = {
   total: 0,
   grades: [30, 60, 80],
   totalGrades() {
+
     this.grades.forEach(function() {
       // console.log(this);
     });
+
     return this.total;
+
   },
 };
 
 user.totalGrades()
 
+
 function forEach(func) {
   func()
 }
 
+
 forEach(function(){})
+
 // 객체의 메서드를 정의하는 방법
 
 
@@ -151,7 +176,7 @@ const another = {
 /* 다음 함수를 작성해봅니다. -------------------------------------------------- */
 
 // * pow(numeric: number, powerCount: number): number;
-// let pow = (numeric,powerCount)=>{
+// let pow = (numeric,powerCount) => {
 
 //   let result = 1;
 
@@ -165,7 +190,7 @@ const another = {
 // 표현식
 // const pow = (numeric,powerCount) => {
   
-  //   return Array(powerCount).fill(null).reduce((acc)=>{
+  //   return Array(powerCount).fill(null).reduce((acc) => {
 //      return acc *= numeric
   //   }, 1)
     
@@ -178,8 +203,7 @@ const pow = (numeric,powerCount) => Array(powerCount).fill(null).reduce(acc => a
 
 
 // * repeat(text: string, repeatCount: number): string;
-// repeat(text: string, repeatCount: number): string;
-// let repeat = (text,repeatCount)=>{
+// let repeat = (text,repeatCount) => {
 
 //   let result = '';
 
@@ -189,12 +213,13 @@ const pow = (numeric,powerCount) => Array(powerCount).fill(null).reduce(acc => a
 //   return result
 // }; 
 
+
 // 문자의 메서드 => '안녕'.repeat(5)
 // repeat('사랑해👋',3)  // '안녕👋안녕👋안녕👋'
 
 
-// const repeat = (text,repeatCount)=>{
-//   return Array(repeatCount).fill(null).reduce((acc)=>{
+// const repeat = (text,repeatCount) => {
+//   return Array(repeatCount).fill(null).reduce((acc) => {
 //     return acc + text
 //   },'')
 // }

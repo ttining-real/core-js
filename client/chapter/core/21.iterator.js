@@ -10,6 +10,8 @@
 
 const arr = '1 2 3 4 5 6'.split(' ');
 
+// console.log( arr.next() );
+
 const iter = arr[Symbol.iterator]();
 
 // for of가 next와 value값을 다 찍어주고 있음

@@ -7,29 +7,29 @@ const number = [10, '10', 6, 101, 10_000];
 
 // ~ 보다 큼 또는 작음 → boolean
 let lessThen = number[0] < number[3];
-console.log('lessThen:', lessThen);
+console.log('lessThen:', lessThen); // true
 
 let greaterThen = number[0] > number[2];
-console.log('greaterThen:', greaterThen);
+console.log('greaterThen:', greaterThen); // true
 
 // ~ 보다 크거나 작음 또는 같음 → boolean
 let lessThenAndEqual = number[3] <= number[1];
-console.log('lessThenAndEqual:', lessThenAndEqual);
+console.log('lessThenAndEqual:', lessThenAndEqual); // false
 
 let greaterThenAndEqual = number[0] >= number[1];
-console.log('greaterThenAndEqual:', greaterThenAndEqual);
+console.log('greaterThenAndEqual:', greaterThenAndEqual); // true
 
 // 동등(등급이나 정도가 같다) → boolean
 let equal = number[0] == number[1];
-console.log('equal:', equal);
+console.log('equal:', equal); // true
 
 // 다름(같지 않음) → boolean
 let inequal = number[0] != number[1];
-console.log('inequal:', inequal);
+console.log('inequal:', inequal); // false
 
 // 동일(똑같다) → boolean
 let same = number[0] === number[1];
-console.log('same:', same);
+console.log('same:', same); // false
 
 
 // 문자 비교

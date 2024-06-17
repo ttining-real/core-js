@@ -365,6 +365,8 @@ const _reduce = (f, acc, i) => {
   if(!i) {
     i = acc;
     acc = i.shift()
+
+    // 좀 더 안전한 방식
     // i = acc[Symbol.iterator]();
     // acc = i.next().value;
   }
@@ -384,7 +386,8 @@ const add = (a,b) => a + b;
 
 // console.log(_reduce(add, 0, [1,2,3]));
 
-console.log(_reduce((t, p) => t + p.price, 0, products));
+console.log(_reduce((t, p) => t + p.price, 0, products)); // 63000
+// console.log(_reduce((t, p) => t + p.price, products)); // [object Object]1500012000800018000
 
 
 console.log( 

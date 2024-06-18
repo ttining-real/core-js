@@ -10,8 +10,10 @@
   <link rel="stylesheet" href="./style.css" />
   <!-- defer : 모든 HTML을 읽고 js 파일을 읽도록 함. -->
   <!-- type="module"은 defer가 기본 설정이다. -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script> <!-- gsap CDN -->
+  <script defer src="./lib/dom/getNode.js"></script>
   <script defer src="./lib/utils/type.js"></script>
-  <script defer src="./chapter/dom/01.BOM.js"></script>
+  <script defer src="./chapter/dom/04.attribute.js"></script>
 </head>
 
 <body>
@@ -28,14 +30,27 @@
   
   <!-- html을 구성하는 아주 작은 요소들을 Node(DOM Node)라고 한다. -->
   <h1>
-    <span class="first"><img src="./assets/tiger.svg" alt="" />hello<img src="./assets/tiger.svg" alt="" /></span>
+    <span class="first hello hi bye" sayHi="hola" data-value="10"><img src="./assets/tiger.svg" alt="" />hello<img src="./assets/tiger.svg" alt="" /></span>
     <span class="second">javascript</span>
     <span class="third">bye~</span>
   </h1>
 
-  <button type="button">누르지마!</button>
+  <!-- <button type="button">누르지마!</button> -->
 
-  <ul style="color: #fff"></ul>
+  <!-- <ul style="color: #fff"></ul> -->
+
+  <section id="visual-section">
+    <ul class="list">
+      <li>home</li>
+      <li>about</li>
+      <li>contact</li>
+    </ul>
+
+    <form name="search-box">
+      <label for="search">검색</label>
+      <input type="text" id="search"/>
+    </form>
+  </section>
   
 </body>
 

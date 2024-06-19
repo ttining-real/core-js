@@ -44,7 +44,7 @@
 
 //   // context가  document가 아니라면 querySelector를 돌아줘. // (3)
 //   if(context.nodeType !== 9) context = document.querySelector(context);
-
+ 
 //   return context.querySelector(node);
 // }
 

@@ -25,6 +25,7 @@ first.classList.add('bye');
 first.classList.remove('hello');
 // first.classList.toggle('hello'); // boolean 반환
 console.log(first.classList.contains('hello')); // 특정 class가 있는지 확인, boolean 반환
+// first.className = ''
 
 
 // addClass 함수 만들기

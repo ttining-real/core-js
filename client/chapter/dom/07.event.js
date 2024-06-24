@@ -10,11 +10,13 @@ function handler() {
   console.log('클릭 이벤트 발생!');
 }
 
+
 // 2. DOM 프로퍼티 : element.onclick = handler
 
 const first = getNode('.first');
-
 // first.onclick = handler;
+const second = getNode('.second');
+
 
 // 3. 메서드 : element.addEventListener(event, handler[, phase])
 // 이벤트 매개변수의 이름 : event, evt, e
@@ -33,7 +35,7 @@ function handleClick(e) {
 
 // first.addEventListener('click', handleClick);
 
-const second = getNode('.second');
+
 
 // second.addEventListener('click', ()=>{
 //   first.removeEventListener('click', handleClick);
@@ -52,6 +54,8 @@ const second = getNode('.second');
 
 // const firstEventRemove = bindEvent('.first', 'click', handleClick);
 
+
+// second 를 클릭 했을 때 제거해보자!
 // second.addEventListener('click', firstEventRemove)
 
 // firstEventRemove(); // 이벤트 제거
@@ -148,6 +152,17 @@ function debounce(callback, limit = 500) {
     }, limit)
   }
 }
+
+
+// call(this,a,a,a,a), apply(this,[a,a,a,a])
+
+// function totalPrice(...args){
+
+//   args
+//   arguments
+// }
+
+// totalPrice(1000,3000,5000)
 
 // ground.addEventListener('mousemove', debounce(function(e) {
 //   console.log(e);

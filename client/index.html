@@ -11,18 +11,36 @@
   <!-- defer : 모든 HTML을 읽고 js 파일을 읽도록 함. -->
   <!-- type="module"은 defer가 기본 설정이다. -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script> <!-- gsap CDN -->
-  <script defer src="./lib/dom/getNode.js"></script>
-  <script defer src="./lib/dom/bindEvent.js"></script>
-  <script defer src="./lib/dom/insert.js"></script>
-  <script defer src="./lib/dom/attr.js"></script>
-  <script defer src="./lib/utils/type.js"></script>
-  <script defer src="./chapter/dom/07.event.js"></script>
+  <script src="./lib/dom/getNode.js"></script>
+  <script src="./lib/dom/bindEvent.js"></script>
+  <script src="./lib/dom/insert.js"></script>
+  <script src="./lib/dom/attr.js"></script>
+  <script src="./lib/dom/css.js"></script>
+  <script src="./lib/utils/type.js"></script>
+  <script defer src="./chapter/dom/09.delegation.js"></script>
 </head>
 
 <body>
-  <div class="ground">
+  <!-- <div class="ground">
     <img src="https://en.js.cx/clipart/ball.svg" id="ball" alt="축구공">
-  </div>
+  </div> -->
+
+  <nav>
+    <ul>
+      <li class="about" data-name="about">
+        😀
+        <span>ABOUT</span>
+      </li>
+      <li class="home" data-name="home">
+        🏠
+        <span>HOME</span>
+      </li>
+      <li class="contact" data-name="contact">
+        📞
+        <span>CONTACT</span>
+      </li>
+    </ul>
+  </nav>
 </body>
 
 </html>

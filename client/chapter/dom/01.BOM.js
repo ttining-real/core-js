@@ -149,10 +149,16 @@ getGeolocation(
 // getGeolocation()
 // .then(res => console.log(res))
 
+// const geo = getGeolocation()
+
+// geo // lat,long
+
 
 
 // navigator.mediaDevices.getUserMedia({video:true})
-
+// .then((stream)=>{
+//   document.querySelector('#videoElement').srcObject = stream;
+// })
 
 
 

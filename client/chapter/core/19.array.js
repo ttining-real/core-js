@@ -10,25 +10,30 @@
 //   순서에 따른 제어가 가능하도록 다양한 메서드와 length 프로퍼티를 언어에서 제공.
 
 
-// 배열 선언                                            split : 해당 문자에서 ,로 구분해서 배열로 만들어주는 메서드
+// 배열 선언
+
 let friends = '한울,재명,정민,유진,윤선,민혁,재림,신혜'.split(',');
 
+
 // 배열 요소의 총 갯수
-// console.log( friends.length );
+
+// console.log( friends.length = 0 );
 
 
 // 배열 요소 변경
-friends[0] = '은선';
+friends[0] = '은선'
+
 
 // 배열 요소 추가
-let unshift = friends.unshift('희재'); // unshift는 length를 반환한다.
-console.log('unshift :', unshift);
+let unshift = friends.unshift('희재');
+console.log( unshift );
+
 
 let push = friends.push('진용');
-console.log('push :',push) // push도 length를 반환한다.
+console.log('push : ',push)
 
 
-// 배열 요소 제거 - 제거된 대상을 반환한다.
+// 배열 요소 제거
 let shift;
 let pop;
 
@@ -40,24 +45,28 @@ let pop;
 
 // 배열 요소 순환(loop)
 // for 문, for ~ of문
-// friends의 length를 l 변수로 선언하고 사용
+
 for(let i = 0, l = friends.length; i < l; i++){
-  console.log(friends[i]);
+  // console.log(friends[i]);
 }
 
 const iter = friends[Symbol.iterator]()
-console.log(iter);
 
-for (const name of iter) {
+
+// Lazy Evaluation => 성능 최적화
+
+for(const name of iter){
   console.log(name);
 }
 
 
 // 배열 복사
 // let copiedArray = [...friends];
-// let copiedArray = [friends.slice()];
-// Array.from : 유사 배열을 넣었을 때 새로운 배열로 만들어준다. / 배열을 넣었을 때도 새로운 배열로
-let copiedArray = Array.from(friends); 
+// let copiedArray = friends.slice();
+let copiedArray = Array.from(friends);
+
+
+
 
 
 // 다차원 배열
@@ -70,4 +79,18 @@ const matrix = [
 ];
 
 // 행렬의 정중앙에 위치한 요소를 찾으려면?
-console.log('matrix :', matrix[1][1]);
+
+matrix[1][1]
+
+
+
+
+
+
+
+
+
+
+
+
+

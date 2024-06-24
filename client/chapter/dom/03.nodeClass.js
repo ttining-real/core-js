@@ -45,19 +45,17 @@
 // - nodeType
 // - nodeName (vs. tagName)
 
+
 const first = getNode('.first');
 
 console.log( first.nodeType === document.ELEMENT_NODE );
 
-console.log( first.nodeName ); // 진짜 노드를 선택하느냐,
-console.log( first.tagName ); // 태그들만 나온다.
+console.log( first.nodeName );
 
-// example
-if(first.tagName === 'SPAN') {
+
+if(first.tagName === 'SPAN'){
   // condition
 }
-
-
 
 /* 노드 콘텐츠 읽기/쓰기 ---------------------------------------------------- */
 
@@ -65,27 +63,27 @@ if(first.tagName === 'SPAN') {
 
 first.innerHTML += '멋쟁이 사자처럼'
 
-
-
 // * 기존 내용 삭제
 
 // first.innerHTML = ''
-
-
 // * 기존 내용과 새로운 내용을 합친 새로운 내용을 씀
 
 // - textContent
 
-first.textContent = '안녕 띠닝' // setter
+first.textContent = '30% 파격 세일' // setter
 
-first.textContent // getter
+first.textContent  // getter
 
 
 // * 요소 내의 텍스트에 접근
-
 // * 태그는 제외하고 오로지 텍스트만 추출
 
+
+
+
 // console.log( first.hidden = true );
+
+
 
 // let toggle = false;
 
@@ -96,14 +94,33 @@ first.textContent // getter
 
 
 
-// * gsap 써보기
-gsap.to('h1', {
-  autoAlpha: 0, // special property (visibility가 변경된다.)
-  // opacity: 0,
-  duration: 0.5,
+
+gsap.to('h1',{
+  opacity:0,
+  duration:0.5,
   repeat: -1,
-  yoyo: true
+  yoyo:true
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

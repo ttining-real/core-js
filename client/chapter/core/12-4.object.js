@@ -27,12 +27,12 @@ const shopOrder = {
 
 // 일반 함수 (문/식)의 this vs. 화살표 함수 식의 this
 
+
 // type Item = {
 //   id:string,
 //   text:string,
 //   link:string
 // }
-
 
 const navigationMenu = {
   name: '글로벌 내비게이션',
@@ -43,14 +43,23 @@ const navigationMenu = {
   getItem(index) {
     return this.items[index];
   },
-  addItem(newItem) {
+  addItem(newItem){
     this.items.push(newItem);
   },
 };
 
-// TypeScript : 객체의 형태를 따로 정의할 수 있다. (ex. id:String, )
-navigationMenu.addItem({
-  id: 'link-l',
-  text: 'lycos',
-  link: 'https://lycos.co.kr',
-})
+
+
+
+// TypeScript 
+
+
+
+
+
+
+
+
+
+
+

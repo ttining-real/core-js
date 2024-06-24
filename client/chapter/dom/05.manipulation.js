@@ -14,16 +14,12 @@ const div = document.createElement('div');
 
 div.className = 'text-box'
 div.textContent = '본문 시작'
-div.setAttribute('data-value', 1)
+div.setAttribute('data-value',1)
 
 console.log(div);
 
-document.body.append(div) // html에 붙여줌
 
-
-
-
-
+document.body.append(div)
 
 
 
@@ -49,52 +45,39 @@ document.body.append(div) // html에 붙여줌
 
 // - insertAdjacentHTML
 
-const h1 = getNode('h1');
 
-// h1.insertAdjacentHTML('beforeend', `<div class="title"> like lion </div>`)
+
+const h1 = getNode('h1');
 
 const tag = `<div class="title"> like lion </div>`
 
-document.body.insertAdjacentHTML('beforeend', tag)
-
-// before >> beforebegin - elem 바로 앞에 삽입
-// first >> afterbegin - elem 안쪽 첫 번째 삽입
-// last >> beforeend - elem 안쪽 마지막 삽입
-// after >> afterend - elem 바깥쪽 삽입
 
 
-// inser before / first / last / after 함수를 만들어보자
-// function insertBefore(node,text){
-//   if(isString(node)) node = getNode(node);
-//   node.insertAdjacentHTML('beforebegin',text)
-// }
 
-// function insertFirst(node,text){
-//   if(isString(node)) node = getNode(node);
-//   node.insertAdjacentHTML('afterbegin',text)
-// }
 
-// function insertLast(node,text){
-//   if(isString(node)) node = getNode(node);
-//   node.insertAdjacentHTML('beforeend',text)
-// }
+// before -> beforebegin - elem 바로 앞에 삽입
+// first  -> afterbegin  - elem 안쪽 첫 번째 삽입
+// last   -> beforeend   - elem 안쪽 마지막 삽입
+// after  -> afterend    - elem 바깥쪽 삽입
 
-// function insertAfter(node,text){
-//   if(isString(node)) node = getNode(node);
-//   node.insertAdjacentHTML('afterend',text)
-// }
 
-// insertLast('body', 'before');
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 // - insertAdjacentElement
 // - insertAdjacentText
-
-
-
-
 
 // - "beforebegin" – elem 바로 앞에 html을 삽입
 // - "afterbegin" – elem의 첫 번째 자식 요소 바로 앞에 html을 삽입

@@ -18,6 +18,9 @@ let memoizedObject = {
 
 memoizedObject = null;
 
+
+
+
 // memoizedObject가 참조한 데이터를 메모리 상에서 제거하도록 코드를 작성해봅니다.
 // ※ 도달할 수 없는 상태가 되면 Garbage Collector에 의해 메모리 상에서 제거됩니다.
 
@@ -27,3 +30,11 @@ memoizedObject = null;
  * JavaScript는 Garbage Collector에 의해 메모리가 관리되므로
  * 개발자가 임의로 데이터를 메모리에 상주할 수 없도록 막거나 하는 것을 할 수 없습니다.
  */
+
+
+
+
+
+
+
+

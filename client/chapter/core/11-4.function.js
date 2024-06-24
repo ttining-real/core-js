@@ -15,17 +15,20 @@
 // - 재귀 단계(step)
 // - 재귀 깊이(depth)
 
-function pow( x, n ) {
 
-  if( n === 1 ) {
+
+function pow(x,n){
+  
+  if(n === 1){
     return x;
-  } 
-  else {
-    return x * pow( x, n - 1 );
+  }
+  else{
+    return x * pow( x , n - 1 );
   }
 }
 
-pow(2, 3);
+
+pow(2,3)
 
 
 
@@ -35,16 +38,17 @@ pow(2, 3);
 // - 기호(!)를 사용하여 n!으로 표기
 // - 예시) 4! = 4 * 3 * 2 * 1
 
-function factorial(n) {
 
-  if( n === 1 ) {
+
+function factorial(n){
+  if( n === 1){
     return n;
   }
-  else {
-    return n * factorial( n - 1 );
+  else{
+    return n * factorial(n-1);
   }
-
 }
+
 
 
 
@@ -53,14 +57,19 @@ function factorial(n) {
 // - 피보나치 수 = 처음과 두번째 항은 1이고, 그 뒤 모든 항은 바로 앞 두 항을 더한 합인 수열
 // 예시) 1, 1, 2, 3, 5, 8, ...
 
-function fibonacci(n) {
 
-  if ( n <= 0 ) return 0;
-  if ( n <= 2 ) return 1;
 
-  // 재귀 2번이나 호출되기 때문에 40이상으로 가면 부하가 많이 걸림
-  return fibonacci( n - 1 ) + fibonacci( n - 2 );
+function fibonacci(n){
+  if(n <= 0) return 0;
+  if(n <= 2) return 1;
+  return fibonacci(n-1) + fibonacci(n-2);
 }
+
+
+
+
+
+
 
 
 
@@ -98,10 +107,11 @@ function fibonacci(n) {
 // - 동일 계산 반복 시, 이전 계산 값을 메모리에 저장하여 실행 속도를 높이는 방법
 
 
-// * 피보나치 재귀함수를 개선해보자!
 
 
 // const cache = {}
+
+
 
 const memoFibo = (n)=>{
   if(n <= 0) return 0;
@@ -117,6 +127,12 @@ const memoFibo = (n)=>{
 
 
 memoFibo.cache = {}
+
+
+
+
+
+
 
 
 
@@ -165,14 +181,16 @@ const SocialPartiners = {
   },
 };
 
+
+
 function sumSalaries(department){
   
   if(Array.isArray(department)){
-    return department.reduce((acc,cur) => acc + cur.salary, 0)
-  } else {
+    return department.reduce((acc,cur)=> acc + cur.salary,0)
+  }else{
 
     let sum = 0;
-    for(let sub of Object.values(department)) {
+    for(let sub of Object.values(department)){
       sum += sumSalaries(sub)
     }
     return sum;
@@ -180,10 +198,10 @@ function sumSalaries(department){
 }
 
 
-function isArray(data) {
+
+function isArray(data){
   return Array.isArray(data)
 }
-
 
 
 const randomUser = {
@@ -222,28 +240,52 @@ const randomUser = {
 };
 
 
-function print(data) {
+function print(data){
 
-  if(Object.prototype.toString.call(data).slice(8,-1).toLowerCase() === 'object') {
-    for(let keyValue of Object.entries(data)) {
+  if(Object.prototype.toString.call(data).slice(8,-1).toLowerCase() === 'object'){
+    for(let keyValue of Object.entries(data)){
       let key = keyValue[0]
       let value = keyValue[1]
   
       if(typeof value === 'object' || isArray(value)){
         print(value)
-      } else {
+      }else{
         console.log(key,' : ' ,value);
       }
     }
   }
 
-  if(isArray(data)) {
+  if(isArray(data)){
     data.forEach((value,index)=>{
-      if(typeof value === 'object' || isArray(value)) {
+      if(typeof value === 'object' || isArray(value)){
         print(value)
-      } else {
+      }else{
         console.log(index,' : ' ,value);
       }
     })
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

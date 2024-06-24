@@ -2,35 +2,33 @@
 /* For Of Loop     */
 /* --------------- */
 
-// * enumerable : 열거 가능한
-// * iterable   : 반복 가능한
 
-// for ... of => iterable 요소만 사용 가능
 
-// string, array ...
+// enumerable : 열거 가능한
+// iterable   : 반복 가능한
 
-// 1. 순서 (index)가 있다.
+// for...of => iterable 요소만 사용 가능 
+
+// string, array
+
+// 1. 순서(index)가 있다.
 // 2. []
 // 3. length
 
+// 유사배열 
 
-// 유사배열
 const arrayLike = {
-  0: 'body',
-  1: 'head',
-  2: 'div',
-  length: 3,
-  // Symbol(Symbol.iterator) () {} // 심볼을 추가해주면 이터러블한 객체로 만들 수 있다.
-};
+  0 : 'body',
+  1 : 'head',
+  2 : 'div',
+  length:3,
+  // Symbol(Symbol.iterator) (){ }
+}
 
-// for(let value of 'hello') {
+
+// for(let value of arrayLike){
 //   console.log(value);
 // }
-
-// for(let value of arrayLike) {
-//   console.log(value); // 이터러블한 요소가 아니기 때문에 타입 에러가 나옴.
-// }
-
 
 
 
@@ -64,23 +62,21 @@ const languages = [
   },
 ];
 
+
 // for ~ of 문
 // - 특정 조건에서 건너띄기 (Java 문자 포함시) continue
 // - 특정 조건에서 중단하기 break
+// 
 
-for (let value of languages) {
+for(let value of languages){
 
   let name = value.name;
 
-  // console.table(name);
-  
-  // if(name.includes('Java') && name.length < 5) continue // Java 텍스트 들어간 거 다 걸러줌
-  if(name.includes('Java') && name.length < 5) break // JavaScript만 나옴
+  if(name.includes('Java') && name.length < 5) break;
 
   // console.table(value);
+
 }
-
-
 
 
 
@@ -96,10 +92,7 @@ const randomUser = {
     country: 'United Kingdom',
     postcode: 'FO5E 4TN',
     coordinates: { latitude: '-4.3301', longitude: '155.0223' },
-    timezone: {
-      offset: '-4:00',
-      description: 'Atlantic Time (Canada), Caracas, La Paz',
-    },
+    timezone: { offset: '-4:00', description: 'Atlantic Time (Canada), Caracas, La Paz' },
   },
   email: 'carol.may@example.com',
   login: {
@@ -130,87 +123,63 @@ const randomUser = {
 // - 성능 비교 진단
 
 
-// arrayLike 배열로 만들기
-// 객체 => 배열 for ... of
+// 객체 => 배열  for...of
 
-
-// Object.keys() : 객체들의 키를 모아 하나의 '배열로 반환'
-// Object.value() : 객체들의 값을 모아 하나의 '배열로 반환'
-// Object.entrise() : 객체의 키와 값을 하나의 쌍으로 만들고 '배열로 반환'
+// Object.keys()    => 객체들의 키를 모아 하나의 '배열로 반환'
+// Object.values()  => 객체들의 값을 모아 하나의 '배열로 반환' 
+// Object.entries() => 객체의 키와 값을 하나의 쌍으로 만들고 이를 '배열로 반환'
 
 const keys = Object.keys(arrayLike);
-const values = Object.keys(arrayLike);
+const values = Object.values(arrayLike);
 const entries = Object.entries(arrayLike);
 
-// console.log(keys);
 
-// for (let value of keys) {
-//   console.log(value);
-// }
-
-// for (let value of values) {
-//   console.log(value);
-// }
-
-for (let keyValue of entries) {
+for(let keyValue of entries){
   // let key = keyValue[0];
   // let value = keyValue[1];
+
+  
+
 }
-
-
 
 Object.prototype.nickName = 'tiger';
 
 
-// has, is가 붙은 함수는 대개 반환하는 값이 Boolean값이다.
 function hasProperty(obj,key){
   return Object.prototype.hasOwnProperty.call(obj,key)
 }
 
 
-console.time();
+console.time()
 
-for(let key in randomUser){
+// for(let key in randomUser){
+//   if(hasProperty(randomUser,key)){
+//     const L1 = randomUser[key];
+//     console.log('\tL1 : ',L1);
+//     if(typeof L1 === 'object'){
+//       for(let key in L1){
+//         if(hasProperty(L1,key)){
+//           const L2 = L1[key];
+//           console.log('\t\tL2 : ',L2);
+//           if(typeof L2 === 'object'){
+//             for(let key in L2){
+//               if(hasProperty(L2,key)){
+//                 const L3 = L2[key];
+//                 console.log('\t\t\tL3 : ',L3);
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 
-  if(hasProperty(randomUser,key)){
-
-    const L1 = randomUser[key];
-
-    console.log('\tL1 : ',L1);
-
-    if(typeof L1 === 'object'){
-
-      for(let key in L1){
-        
-        if(hasProperty(L1,key)){
-
-          const L2 = L1[key];
-          console.log('\t\tL2 : ',L2);
-
-          if(typeof L2 === 'object'){
-            
-            for(let key in L2){
-              
-              if(hasProperty(L2,key)){
-                const L3 = L2[key];
-
-                console.log('\t\t\tL3 : ',L3);
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-// 재귀 함수
+// 재귀 함수 
 
 
 
-// 조상까지 찾지 않음
-// 딱 내가 가지고 있는 것들만 찾아낸다.
-// 똑같은 일을 반복하는 것을 재귀함수로 해결할 수 있다!
+
 for(let keyValue of Object.entries(randomUser)){
   let key = keyValue[0];
   let value = keyValue[1];
@@ -235,4 +204,29 @@ for(let keyValue of Object.entries(randomUser)){
   }
 }
 
-console.timeEnd();
+
+console.timeEnd()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,23 +1,25 @@
+
+
 /* ----------------------------- */
-/* Classes 기본 문법              */
+/* Classes                       */
 /* ----------------------------- */
 
 // 앞서 함수로 정의한 내용들을 class문법을 사용해 재정의 합니다.
 
 
-// 단계별로 학습을 진행함~
 // 1. 객체의 상속
 // 2. 생성자 함수의 상속
-// 3. 생성자 함수 모던 방식 Class
+// 3. 생성자 함수 모던 방식 class
+
+
 
 
 class Animal {
-  // 클래스 filled(?) 값이 변경되지 않는다면 이렇게도 사용이 된다.
   legs = 4
   tail = true
-
+  
   constructor(name){
-    this.name = name,
+    this.name = name;
     this.stomach = []
   }
 
@@ -28,15 +30,14 @@ class Animal {
   set eat(food){
     this.stomach.push(food)
   }
-
 }
+
 
 const a = new Animal('포동이');
 
 
 
 
-// Animal에서부터 확장을 시켜서 Tiger라는 클래스를 만든다.
 class Tiger extends Animal {
 
   static options = {
@@ -45,19 +46,20 @@ class Tiger extends Animal {
     ceo:'심선범'
   }
 
-  constructor(name){ // constructor를 생략하는 것도 가능하다. (가져올 필요가 없다면)
-    super(name) // 부모의 능력을 쓰고 싶다면 super를 call 해야한다. (부모의 constructor를 호출)
+  constructor(name){
+    super(name);
     this.pattern = '호랑이무늬'
   }
 
-  static bark(sound){ // 스태틱 메서드 정의
+  static bark(sound){
     return sound + '🐯'
   }
 
-  hunt(target){ // 인스턴스 메서드 정의
+  hunt(target){
     return `${target}에게 조용히 접근한다.`
   }
 }
+
 
 
 const 호랑이 = new Tiger('호돌이');
@@ -65,34 +67,35 @@ const 호랑이 = new Tiger('호돌이');
 
 
 
-class Array extends Object{
+
+
+// class Array extends Object{
   
-  // constructor(){
+//   constructor(){
 
-  // }
+//   }
 
-  forEach(callback,arg){
+//   forEach(callback,arg){
 
-  }
+//   }
 
-  reduce(){
+//   reduce(){
 
-  }
-  map(){
+//   }
+//   map(){
 
-  }
+//   }
 
-  static isArray(){
+//   static isArray(){
 
-  }
+//   }
 
-  static from(){
+//   static from(){
 
-  }
-}
+//   }
+// }
 
-new Array()
-
+// new Array()
 
 
 
@@ -165,6 +168,7 @@ class Todo {
 
 
 
+
 const button = new Todo({
   input:'#todo',
   button:'.register',
@@ -178,3 +182,14 @@ const button2 = new Todo({
   button:'.register2',
   renderPlace:'.todoList2'
 })
+
+
+
+
+
+
+
+
+
+
+

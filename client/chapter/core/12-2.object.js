@@ -22,40 +22,39 @@ console.log(messenger == conversationTool);
 console.log(messenger === conversationTool);
 
 
-// * 객체 복사 - 얕은 복사
+// 객체 복사
 // 1. for ~ in 문을 사용한 복사
+
 const cloneObject = {};
 
-for(let key in messenger) {
+for(let key in messenger){
   cloneObject[key] = messenger[key]
 }
-console.log(cloneObject); 
 
-
+console.log( cloneObject);
 
 // 2. Object.assign()을 사용한 복사
-const copyObject = Object.assign({}, messenger);
+
+const copyObject = Object.assign({},messenger);
 
 console.log(copyObject);
 
 
 
-// 3. 전개 연산자(...)를 사용한 복사 (제일 많이 사용)
+// 3. 전개 연산자(...)를 사용한 복사
+
 const spreadObject = {...messenger};
 
-console.log(spreadObject);
-
-
+console.log( spreadObject );
 
 // 4. 객체를 복사해주는 유틸 함수 
 
-// const copiedObject = (obj)=> {
-//   return Object.assign({}, obj)
-// }
-const copiedObject = (obj)=> Object.assign({}, obj)
 
-// const newObject = copiedObject(obj);
-// console.log(copiedObject);
+const copiedObject = (obj) => Object.assign({},obj)
+
+
+const newObject = copiedObject(messenger);
+
 
 
 
@@ -73,11 +72,10 @@ const cssMapB = {
   color: '#3f9e97',
 };
 
-// mixin
+// mixin 
 
-//                                 같은 값이 있으면 뒤에 오는 것이 덮어쓴다 (...cssMapB)
-// let combinedCssMap = Object.assign({}, cssMapA, cssMapB);
-let combinedCssMap = {...cssMapA, ...cssMapB} // 전개 합성
+// let combinedCssMap = Object.assign({},cssMapA,cssMapB)
+let combinedCssMap = {...cssMapA,...cssMapB}
 
 
 // 중첩된 프로퍼티에 객체를 포함하는 객체 복사
@@ -93,10 +91,7 @@ const containerStyles = {
   },
 };
 
-// let copiedContainerStyles = {...containerStyles};
 
-
-// ...containerStyles로 깊은 복사하는 방법 (1depth밖에 안됨)
 let copiedContainerStyles = {
   ...containerStyles,
   ['max-width']:{
@@ -107,12 +102,8 @@ let copiedContainerStyles = {
 // let copiedContainerStyles = cloneDeep(containerStyles);
 
 
-
-
-
 // 1. 깊은 복사 유틸리티 함수
 function cloneDeep(object) {
-  //            fromEntries : 배열을 객체로 만들어줌
   return Object.fromEntries(
     Object.entries(object).map(([key, value]) => {
       let type = typeof value;
@@ -126,8 +117,7 @@ function cloneDeep(object) {
 
 
 
-console.clear();
-
+console.clear()
 
 const defaultOptions = {
   method:'GET',
@@ -139,37 +129,29 @@ const defaultOptions = {
 }
 
 
-// 객체 합성
 function ajax(options){
 
-  // 객체를 합성하고 새로운 객체를 생성하는 것이 안전하다.(기존 객체가 훼손될 일이 없다.)
-  // const newOptions = {...defaultOptions, ...options,}
-  const {method, headers, body} = { // 받는 즉시 합성
+
+  const {method,body,headers} = {
     ...defaultOptions,
     ...options,
-    headers:{ // headers의 값도 객체이기 때문에 (훼손될 수 있기 때문)  한 번 더 깊은 복사해주는 것.
+    headers:{
       ...defaultOptions.headers,
-      ...options.headers // 항상 뒤에 있는 것이 덮어씌워지기 때문에 커스텀은 뒤에 불러와야한다.
+      ...options.headers
     }
-
   }
 
-  // const {method, headers, body} = mixin;
+  // const {method,body} = mixin
 
+  console.log(headers);
 
-  // console.log(newOptions);
-  console.log(method);
-
-  defaultOptions.headers
-  defaultOptions.method
-  defaultOptions.body
+  
+  
 }
 
-// 왜 객체로 전달하는지? 순서가 상관 없기 때문
-// ajax({
-//   method: 'POST',
-//   body: '데이터'
-// })
+
+//  왜 객체로 전달해요? 순서 상관 x 
+
 ajax({
   body:'data',
   headers:{
@@ -179,8 +161,9 @@ ajax({
 
 
 
+
+
 // 2. Lodash 라이브러리 활용
-// lodash 라이브러리를 사용해서 깊은 복사를 할 수도 있다.
 // _.cloneDeep(value)
 // 참고: https://lodash.com/docs/4.17.15#cloneDeep
 // CDN : https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js

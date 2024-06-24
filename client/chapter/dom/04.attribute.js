@@ -22,48 +22,26 @@
 
 /* DOM 프로퍼티 검토 ------------------------------------------------------- */
 
-// * - elementNode.hasAttribute(name) – 속성 존재 여부 확인
+// - elementNode.hasAttribute(name) – 속성 존재 여부 확인
 
 const first = getNode('.first');
 
-console.log( first.hasAttribute('class') ); // true
-console.log( first.hasAttribute('id') ); // false
+console.log( first.hasAttribute('id') );
 
 
+// - elementNode.getAttribute(name) – 속성값을 가져옴
+console.log( first.getAttribute('data-value') );
 
 
+// - elementNode.setAttribute(name, value) – 속성값을 변경함
+first.setAttribute('id','tiger')
 
-// * - elementNode.getAttribute(name) – 속성값을 가져옴
-
-console.log( first.getAttribute('class') ); // first hello hi bye
-console.log( first.getAttribute('sayHi') ); // hola // 모든 비표준 속성을 순환할 수 있다.
-console.log( first.getAttribute('data-value') ); // 10
-// console.log( first.getAttribute('class').split(' ') ); // ['first', 'hello', 'hi', 'bye']
-
-
-
-
-
-// * - elementNode.setAttribute(name, value) – 속성값을 변경함
-first.setAttribute('id', 'tiger')
-
-
-
-
-
-// * - elementNode.removeAttribute(name) – 속성값을 지움
+// - elementNode.removeAttribute(name) – 속성값을 지움
 first.removeAttribute('id')
 
-
-
-
-
-// * - elementNode.attributes – 열거 가능한(iterable) 속성 집합을 반환함
-console.log( first.attributes ); // Symbol(Symbol.iterator)가 있다.
-
-
-
-
+// - elementNode.attributes – 열거 가능한(iterable) 속성 집합을 반환함
+console.log( first.attributes );
+// [Symbol.iterator]().next().value 
 
 /* 비표준 속성, 프로퍼티 설정 ------------------------------------------------- */
 
@@ -72,95 +50,41 @@ console.log( first.attributes ); // Symbol(Symbol.iterator)가 있다.
 
 // - elementNode.dataset
 
-// setter
-first.dataset.name = 'ttining' // data-name="ttining"
 
-// getter - DOMStringMap이 생김
-console.log( first.dataset );
-console.log( first.dataset.name );
+first.dataset.name = 'seonbeom' // setter
 console.log( first.dataset.value );
 
 console.log( first.getAttribute('data-name') );
 
-// => dataset과 getAttribute 둘 다 가능함.
-
-
-// first.removeAttribute('id')
-// first.setAttribute('class', '')
-
-
-// * getAttribute / setAttribute를 getAttr, setAttr로 줄여보자!
-// getAttr
-function getAttr(node, prop) {
-
-  if(isString(node)) node = getNode(node);
-  // if(typeof node === 'string') node = document.querySelector(node);
-
-  if(!isString(prop)) throw new TypeError('getAttr 함수의 두 번째 인수는 문자 타입이어야 합니다.')
-
-  return node.getAttribute(prop);
-}
-
-// getAttr('.first', 'sayHi'); // 'hola'
-
-
-// getNode('.first').removeAttribute('class')
-
-
-// Error에 따라 문구 정해놓고 불러오기
-function typeError(message) {
-  return new TypeError(message + '문자 타입이어야 합니다.');
-}
-
-
-// setAttr
-function setAttr(node, prop, value) {
-
-  if(isString(node)) node = getNode(node);
-
-  // if(!isString(prop)) throw new TypeError('setAttr 함수의 두 번째 인수는 문자 타입이어야 합니다.')
-  if(!isString(prop)) {
-    typeError('setAttr 함수의 두 번째 인수는')
-  }
-
-  // (3)
-  if(value === '') {
-    node.removeAttribute(prop);
-    return;
-  }
-
-  // (4) - (3), (4)의 순서는 바뀌면 안된다. => '' 빈 문자열도 값이 없다고 해석하기 때문
-  if(!value) throw new ReferenceError('setAttr 함수의 세 번째 인수는 필수 입력값 입니다.')
-
-  node.setAttribute(prop, value);
-}
-
-// setAttr('.second', 'class', '');
+// first.removeAttribute('sayHi')
+// first.setAttribute('class','')
 
 
 
-// * 스몰 과제
-// setAttr('.second', 'data-name', 'tiger') // first.dataset.name
-// 이렇게 넣었을 때
-// prop에 data가 있어?
-// 그럼 dataset으로 넣기
 
 
-// * getAttribute / setAttribute의 기능을 확장한 attr 함수 만들기
-
-// function attr(node, prop, value) {
-
-//   if(!value) {
-//     return getAttr(node, prop);
-//   } else {
-//     setAttr(node, prop, value);
-//   }
-
-// }
-
-// attr 함수를 한줄로 바꿔보기 (삼항 연산자)
-const attr = (node, prop, value) => !value ? getAttr(node, prop) : setAttr(node, prop, value);
 
 
-// attr('.first', 'class') // getter
-// attr('.first', 'class', 'hahaha'); // setter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,3 +1,7 @@
+
+import { getNode } from "./getNode.js";
+import { isString } from "../utils/type.js";
+
 function getAttr(node,prop){
 
   if(isString(node)) node = getNode(node);
@@ -26,10 +30,8 @@ function setAttr (node,prop,value){
     return;
   }
 
-  // prop에 data가 있으면 dataset으로 넣기 
-  if(prop.startWith('data')){
-
-    prop = prop.slice(5);
+  if(prop.startsWith('data')){
+    prop = prop.slice(5)
     node.dataset[prop] = value;
     return;
   }
@@ -40,10 +42,6 @@ function setAttr (node,prop,value){
   node.setAttribute(prop,value);
 }
 
-// setAttr('.first', 'data-name', 'ttining'); // prop에 data가 있으면 dataset으로 넣기
-
-
-// attr 함수 만들기
 
 // function attr(node,prop,value){
 //   if(!value){
@@ -53,4 +51,6 @@ function setAttr (node,prop,value){
 //   }
 // }
 
-const attr = (node,prop,value) => !value ? getAttr(node,prop) : setAttr(node,prop,value)
+ export const attr = (node,prop,value) => !value ? getAttr(node,prop) : setAttr(node,prop,value)
+
+ 

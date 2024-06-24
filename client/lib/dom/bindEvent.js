@@ -1,10 +1,17 @@
-// 이벤트 추가/제거 하는 함수 만들기 (클로저)
-function bindEvent(node, type, handler) {
+import { getNode } from "./getNode.js";
+import { isString } from "../utils/type.js";
 
-  if(isString(node)) node = getNode(node);
+
+
+export function bindEvent(node,type,handler){
   
-  node.addEventListener(type, handler);
+  if(isString(node)) node = getNode(node);
 
-  return () => node.removeEventListener(type, handler);
+  node.addEventListener(type,handler);
+
+  return () => node.removeEventListener(type,handler);
 
 }
+
+
+

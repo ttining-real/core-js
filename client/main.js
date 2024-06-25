@@ -1,9 +1,15 @@
 import data from "./data/data.js";
 import { 
+  copy,
+  shake,
   getNode, 
+  addClass,
+  showAlert,
   getRandom, 
   insertLast, 
-  clearContents 
+  removeClass,
+  clearContents,
+  isNumericString,
 } from './lib/index.js'
 
 
@@ -24,6 +30,9 @@ import {
 // 4. pick 항목 랜더링하기
 
 
+// [phase-2]
+// 1. 아무 값도 입력 안 했을 때
+
 const submit = getNode('#submit');
 const nameField = getNode('#nameField');
 const result = getNode('.result');
@@ -36,12 +45,47 @@ function handleSubmit(e){
   const list = data(name);
   const pick = list[getRandom(list.length)];
 
-  console.log( pick );
-  
-  clearContents(result);
-  insertLast(result,pick);
+  // name이 비어있거나, 공백인 경우
+  if(!name || name.replace(/\s*/g,'') === '') {
 
-  
+    showAlert('.alert-error', '공백은 허용하지 않습니다.');
+
+    // addClass('#nameField', 'shake')
+
+    shake('#nameField').restart();
+
+    return;
+  }
+
+  // name이 숫자일 경우
+  if(!isNumericString(name)) {
+
+    showAlert('.alert-error', '제대로 된 이름을 입력해 주세요.');
+    shake('#nameField').restart();
+    return;
+  }
+
+  clearContents(result);
+  insertLast(result,pick);  
 }
 
-submit.addEventListener('click',handleSubmit)
+
+
+function handleCopy() {
+  const text = result.textContent;
+
+  if(nameField.value) {
+    copy(text)
+    .then(() => {
+      showAlert('.alert-success', '클립보드 복사 완료!');
+    });
+  }
+}
+
+
+
+submit.addEventListener('click',handleSubmit);
+result.addEventListener('click',handleCopy);
+
+
+

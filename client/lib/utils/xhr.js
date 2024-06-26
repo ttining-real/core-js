@@ -47,7 +47,7 @@ function xhr({
   
   const xhr = new XMLHttpRequest();
   
-  xhr.open(method, url);
+  xhr.open(method, url); // 가져오는 시간이 걸림
 
   Object.entries(headers).forEach(([key,value])=>{
     xhr.setRequestHeader(key,value)
@@ -136,28 +136,73 @@ xhr.delete = (url,성공,실패) =>{
 }
 
 
-xhr.post(
-  ENDPOINT,
-  (data)=>{
-    console.log( data );
-  },
-  (err)=>{
-    console.log( err );
-  }
-)
+// xhr.post(
+//   ENDPOINT,
+//   (data)=>{
+//     console.log( data );
+//   },
+//   (err)=>{
+//     console.log( err );
+//   }
+// )
 
 
 // console.dir(xhr);
 
+// xhr({
+//   method: 'DELETE',
+//   onSuccess(data) {
+//     console.log(data);
+//   },
+//   onFail(err) {
+//     console.log(err);
+//   },
+//   url: ENDPOINT,
+// });
+
+
+// console.log(ENDPOINT);
 
 
 /* -------------------------------------------- */
 /*               xhr Promise 방식               */
 /* -------------------------------------------- */
 
-
-
 // xhr
 // .post(ENDPOINT)
 // .then()
 // .then()
+
+
+
+function xhrPromise(method,url,body){
+
+  const xhr = new XMLHttpRequest();
+  
+  xhr.open(method,url);
+
+  xhr.send(JSON.stringify(body));
+
+  return new Promise((resolve, reject) => {
+    
+    xhr.addEventListener('readystatechange',() => {
+      if(xhr.readyState === 4) {
+        if(xhr.status >= 200 && xhr.status < 400) {
+          // 성공
+          resolve(JSON.parse(xhr.response));
+        }
+        else{
+          // 실패
+          reject({message: '알 수 없는 오류'});
+        }
+      }
+    })
+  })
+}
+
+
+
+xhrPromise('GET',ENDPOINT,{name:'tiger'})
+.then((res) => {
+  console.log( res );
+})

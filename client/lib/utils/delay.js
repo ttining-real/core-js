@@ -304,7 +304,7 @@ delayA();
 
 
 async function getData() {
-  const data = await xhrPromise.get('https://pokeapi.co/api/v2/pokemon/172');
+  const data = await xhrPromise.get('https://pokeapi.co/api/v2/pokemon/108');
 
   console.log(data.sprites.other.showdown['front_default']);
 

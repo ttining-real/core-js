@@ -27,21 +27,21 @@ const second = getNode('.second');
 //   console.log('hi');
 // }, 1000)
 
-delay(() => {
-  // console.log('1');
-  first.style.top = '-100px';
-  second.style.top = '100px';
-  delay(()=>{
-    // console.log('2');
-    first.style.transform = 'rotate(360deg)';
-    second.style.transform = 'rotate(-360deg';
-    delay(()=>{
-      // console.log('3');
-      first.style.top = '0px';
-      second.style.top = '0px';
-    })
-  })
-}, 1000)
+// delay(() => {
+//   // console.log('1');
+//   first.style.top = '-100px';
+//   second.style.top = '100px';
+//   delay(()=>{
+//     // console.log('2');
+//     first.style.transform = 'rotate(360deg)';
+//     second.style.transform = 'rotate(-360deg';
+//     delay(()=>{
+//       // console.log('3');
+//       first.style.top = '0px';
+//       second.style.top = '0px';
+//     })
+//   })
+// }, 1000)
 
 // => 콜백의 한계 : 반복이 많아질수록 뎁스가 깊어진다.
 
@@ -49,18 +49,18 @@ delay(() => {
 
 
 
-const shouldRejected = false;
+const shouldRejected = true;
 
 // resolve와 reject는 '함수'다. => 값을 전달할 수 있다.
-const p = new Promise((resolve, reject) => {
+// const p = new Promise((resolve, reject) => {
 
-  if(!shouldRejected) {
-    resolve('성공');
+//   if(!shouldRejected) {
+//     resolve('성공');
 
-  } else {
-    reject('실패!');
-  }
-})
+//   } else {
+//     reject('실패!');
+//   }
+// })
 
 
 // console.log(p);
@@ -124,6 +124,11 @@ const defaultOptions = {
 }
 
 
+// const config = Object.assign({}, defaultOptions);
+// const config = {...defaultOptions};
+
+
+
 // function delayP(shouldRejected, data, errorMessage, timeout = 1000){
 function delayP(options){
 
@@ -144,7 +149,7 @@ function delayP(options){
 
   let {shouldRejected, data, errorMessage, timeout} = config;
   
-  console.log(config);
+  // console.log(config);
   
 
   return new Promise((resolve, reject) => {
@@ -163,15 +168,14 @@ function delayP(options){
 // 개선 이유 : 이렇게 실행하면 편하지 않을까?
 // delayP(true, '성공!', '알 수 없는 오류!', 1000);
 
-delayP({
+// delayP({
   // shouldRejected: false,
   // data: '성공',
   // errorMessage: '알 수 없는 오류',
   // timeout: 1000
-})
+// })
 
-
-
+delayP(5000);
 
 
 

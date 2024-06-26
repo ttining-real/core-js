@@ -172,28 +172,62 @@ xhr.delete = (url,성공,실패) =>{
 // .post(ENDPOINT)
 // .then()
 // .then()
+  
+
+// url: ''
+// body: null
+// 이유 : body에 해당하는 객체가 없을 경우 즉 GET같은 경우에는 본문을 가지지않으니까 값이 비어있게 하려고 설정한거고 url 문자열은 비어있어도 오류가 발생하지 않게 하려고 그런것같습니다!
 
 
+const defaultOptions = {
+  method:'GET',
+  url: '',
+  body: null,
+  errorMessage:'서버와의 통신이 원활하지 않습니다.',
+  headers:{
+    'Content-Type':'application/json',
+    'Access-Control-Allow-Origin': '*' // 프론트 단에서의 최선
+  }
+}
 
-function xhrPromise(method,url,body){
+// enumerable => 열거 가능한 => for..of/ for..in
+// iterable   => 순환 가능한 => for..of 
+// immutable  => 불변의
+
+// const arr = [1,2,3];
+// const newArr = [...arr,4]
+
+export function xhrPromise(options){
+
+  // 객체 합성과 동시에 구조분해할당
+  const {method,url,body,headers,errorMessage} = {
+    ...defaultOptions,
+    ...options,
+    headers:{
+      ...defaultOptions.headers,
+      ...options.headers
+    }
+  }
 
   const xhr = new XMLHttpRequest();
-  
+
   xhr.open(method,url);
+
+  Object.entries(headers).forEach(([key,value])=>{
+    xhr.setRequestHeader(key,value);
+  })
 
   xhr.send(JSON.stringify(body));
 
   return new Promise((resolve, reject) => {
     
-    xhr.addEventListener('readystatechange',() => {
-      if(xhr.readyState === 4) {
-        if(xhr.status >= 200 && xhr.status < 400) {
-          // 성공
+    xhr.addEventListener('readystatechange',()=>{
+      if(xhr.readyState === 4){
+        if(xhr.status >= 200 && xhr.status < 400){
           resolve(JSON.parse(xhr.response));
         }
         else{
-          // 실패
-          reject({message: '알 수 없는 오류'});
+          reject({message:errorMessage});
         }
       }
     })
@@ -202,7 +236,39 @@ function xhrPromise(method,url,body){
 
 
 
-xhrPromise('GET',ENDPOINT,{name:'tiger'})
-.then((res) => {
-  console.log( res );
-})
+xhrPromise.get = (url) => {
+  return xhrPromise({ url })
+}
+
+
+xhrPromise.post = (url,body) => {
+  return xhrPromise({
+    url,
+    body,
+    method:'POST'
+  })
+}
+
+
+xhrPromise.put = (url,body) => {
+  return xhrPromise({
+    url,
+    body,
+    method:'PUT'
+  })
+}
+
+
+xhrPromise.delete = (url) => {
+  return xhrPromise({
+    url,
+    method:'DELETE'
+  })
+}
+
+
+// 줄여쓰기
+// xhrPromise.get = (url) => xhrPromise({ url })
+// xhrPromise.post = (url,body) => xhrPromise({ url, body, method:'POST' })
+// xhrPromise.put = (url,body) => xhrPromise({ url, body, method:'PUT' })
+// xhrPromise.delete = url => xhrPromise({ url, method:'DELETE' })

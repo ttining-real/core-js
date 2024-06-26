@@ -1,6 +1,8 @@
 
 import { getNode } from "../dom/getNode.js";
+import { insertLast } from "../dom/insert.js";
 import { isNumber, isObject } from "./type.js";
+import { xhrPromise } from "./xhr.js";
 
 
 // delay 함수
@@ -178,8 +180,6 @@ function delayP(options){
 delayP(5000);
 
 
-
-
 // 프로미스 체이닝으로 콜백의 한계를 극복함.
 // delayP()
 //   .then((res) => {
@@ -203,3 +203,113 @@ delayP(5000);
 //     console.log(res);
 //   });
 
+
+
+
+
+/* -------------------------------------------------------------------------- */
+/*                                 async await                                */
+/* -------------------------------------------------------------------------- */
+
+
+// * async 함수는 무.조.건 Promise object를 반환한다.
+// promise를 쉽고 빠르게 만들어서 반환해주는 함수
+// async function delayA(data) {
+//   return data
+// }
+
+// delayA('지연')
+// .then((res) => {
+//   console.log(res);
+// })
+
+async function delayA(data) {
+
+  const p = new Promise((resolve, reject) => {
+    // setTimeout(() => {
+    //   resolve('성공!');
+    // }, 2000);
+  })
+
+  const result = await p; // result에 결과값을 담을 때까지 아래 코드를 실행하지 않음.
+
+  console.log(result);
+
+  // return data
+  return
+}
+
+delayA();
+
+// * await 함수는 2가지 기능을 수행한다.
+// 1. result 꺼내오기
+// 2. 코드 실행 흐름 제어
+// await 뒤에 오는 것이 promise 객체여야지만 result를 꺼내쓸 수 있다.
+
+// const data = await delayA('지연');
+
+// console.log(data);
+
+
+// Top-level await
+
+
+// 코드 실행 흐름
+// function 라면끓이기(){
+//   console.log('물');
+//   console.log('스프');
+//   console.log('면');
+//   console.log('그릇');
+// }
+
+// 라면끓이기()
+
+
+// function 라면끓이기(){
+
+//   delayP()
+//   .then(() => {
+//     console.log('물');
+//   })
+//   .then(() => {
+//     console.log('스프');
+//   })
+//   .then(() => {
+//     console.log('면');
+//   })
+//   .then(() => {
+//     console.log('그릇');
+//   })
+// }
+
+// 라면끓이기()
+
+// async function 라면끓이기(){
+
+//   await delayP()
+//   console.log('물');
+
+//   await delayP()
+//   console.log('스프');
+
+//   await delayP()
+//   console.log('면');
+  
+//   await delayP()
+//   console.log('그릇');
+// }
+
+// 라면끓이기()
+
+
+
+async function getData() {
+  const data = await xhrPromise.get('https://pokeapi.co/api/v2/pokemon/172');
+
+  console.log(data.sprites.other.showdown['front_default']);
+
+  insertLast(document.body,`<img src="${data.sprites.other.showdown['front_default']}" alt="" />`)
+}
+
+
+getData()

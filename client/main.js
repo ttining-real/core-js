@@ -2,13 +2,15 @@
 
 import { 
   tiger,
-  getNode,
-  renderUserCard,
-  changeColor,
   delayP,
+  getNode,
+  changeColor,
+  clearContents,
   renderSpinner,
-  renderEmptyCard
- } from './lib/index.js';
+  renderUserCard,
+  renderEmptyCard,
+ } from "./lib/index.js";
+
 
 // xhrPromise.get('https://jsonplaceholder.typicode.com/users')
 // .then(console.log)
@@ -33,7 +35,8 @@ import {
 // getData()
 
 
-const ENDPOINT = 'https://jsonplaceholder.typicode.com/users'
+// const ENDPOINT = 'https://jsonplaceholder.typicode.com/users'
+const ENDPOINT = 'http://localhost:3000/users'
 
 
 // const response = tiger.get(ENDPOINT);
@@ -59,7 +62,7 @@ async function renderUserList() {
   // 로딩 스피너 렌더링
   renderSpinner(userCardInner)
 
-  await delayP(2000);
+  // await delayP(2000);
 
   try {
     // 로딩 스피너 제거
@@ -108,3 +111,96 @@ async function renderUserList() {
 }
 
 renderUserList()
+
+
+// 삭제 버튼 누르면 user card 지워지게
+// 이벤트 위임
+
+function handleDeleteCard(e) {
+
+  const button = e.target.closest('button');
+
+  if(!button) return; // button 없을 경우
+  // console.log(button);
+
+
+  // data-index는 article이 가지고 있음
+  // button에 인접한 article을 찾기 위해 closest 한 번 더 사용
+  const article = button.closest('article');
+  const index = article.dataset.index.slice(5); // 숫자만 선택
+  // console.log(index)
+
+  // 삭제 -> delete 통신 (id)
+  // 내가 선택한 것이 몇 번째 카드인지 선택해야함
+  tiger.delete(`${ENDPOINT}/${index}`)
+  .then(() => {
+    // 요청 보내고 렌더링 하기
+    clearContents(userCardInner)
+    renderUserList()
+  })
+
+  // tiger.get()
+  // 요청보내기 렌더링하기
+}
+
+
+userCardInner.addEventListener('click', handleDeleteCard)
+
+
+
+const createButton = getNode('.create');
+const cancelButton = getNode('.cancel');
+const doneButton = getNode('.done');
+
+
+function handleCreate() {
+  
+  // autoAlpha => visibility : initial, opacity: 1
+  gsap.to('.pop', {autoAlpha: 1})
+
+}
+
+function handleCancel(e) {
+  e.stopPropagation()
+  gsap.to('.pop', {autoAlpha: 0})
+}
+
+
+// 생성 버튼 클릭 시 유저 추가
+function handleDone(e) {
+  e.preventDefault();
+  
+  const name = getNode('#nameField').value;
+  const email = getNode('#emailField').value;
+  const website = getNode('#siteField').value;
+
+  console.log( name, email, website );
+
+  // const obj = {
+  //   name: name, 
+  //   email: email, 
+  //   website: website
+  // }
+  // 어차피 객체니까 바로~
+
+  tiger.post(ENDPOINT, {name, email, website})
+  .then(() => {
+    // 순서 보장을 위해 then 사용
+    // 1. 팝업 닫기
+    gsap.to('.pop', {autoAlpha: 0})
+
+    // 2. 카드 컨텐츠 비우기
+    clearContents(userCardInner);
+
+    // 3. user-card 렌더링 하기
+    renderUserList();
+  })
+
+  
+}
+
+
+
+createButton.addEventListener('click', handleCreate);
+cancelButton.addEventListener('click', handleCancel);
+doneButton.addEventListener('click', handleDone);

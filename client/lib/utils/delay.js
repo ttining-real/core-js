@@ -132,7 +132,7 @@ const defaultOptions = {
 
 
 // function delayP(shouldRejected, data, errorMessage, timeout = 1000){
-function delayP(options){
+export function delayP(options){
 
   // const {shouldRejected, data, errorMessage, timeout} = options; // => 구조분해할당
   // const {shouldRejected, data, errorMessage, timeout} = config; // => 구조분해할당
@@ -177,32 +177,55 @@ function delayP(options){
   // timeout: 1000
 // })
 
-delayP(5000);
-
+// delayP(5000);
 
 // 프로미스 체이닝으로 콜백의 한계를 극복함.
 // delayP()
-//   .then((res) => {
-//     console.log(res);
-//     first.style.top = '-100px';
-//     second.style.top = '100px';
+// .then((res) => {
+//   console.log(res);
+//   first.style.top = '-100px';
+//   second.style.top = '100px';
 
-//     return delayP();
-//   })
+//   return delayP();
+// })
 
-//   .then((res) => {
-//     console.log(res);
-//     first.style.transform = 'rotate(360deg)';
-//     second.style.transform = 'rotate(-360deg)';
+// .then((res) => {
+//   console.log(res);
+//   first.style.transform = 'rotate(360deg)';
+//   second.style.transform = 'rotate(-360deg)';
 
-//     return delayP();
-//   })
-//   .then((res) => {
-//     first.style.top = '0px';
-//     second.style.top = '0px';
-//     console.log(res);
+//   return delayP();
+// })
+// .then((res) => {
+//   first.style.top = '0px';
+//   second.style.top = '0px';
+//   console.log(res);
+// });
+
+
+// delayP(1000)
+// .then((res)=>{
+//   console.log(res);
+//   // then은 Promise 객체를 반환함
+//   // 반환하는 그 객체는 return에 적힌 값을 PromiseResult로 갖는 Promise 객체임
+//   // return에 아무것도 안적으면 undefined가 담겨있기 때문에
+//   // 체이닝으로 다음에 오는 then에서 매개변수(res)로 앞에서 PromiseResult를 받아와도 undefined인 것
+// })
+// .then((res)=>{
+//   console.log(res);
+//   // 근데, 이렇게 Promise 객체를 직접 반환하게 되면,
+//   // 반환하는 Promise의 PromiseResult를 PromiseResult로 갖는 Promise 객체를 반환함 (잘 읽어보세요...ㅋㅋㅋ)
+//   // 그래서 다음에 오는 then 에서는 '어머'를 res로 받아간다...
+//   return new Promise((resolve, reject) => {
+//     resolve('어머')
 //   });
-
+// })
+// .then((res)=>{
+//   console.log(res);
+// })
+// .then((res)=>{
+//   console.log(res);
+// })
 
 
 
@@ -303,6 +326,7 @@ delayA();
 
 
 
+// 포켓몬 API 사용ㅎ
 async function getData() {
   const data = await xhrPromise.get('https://pokeapi.co/api/v2/pokemon/108');
 
@@ -312,4 +336,4 @@ async function getData() {
 }
 
 
-getData()
+// getData()

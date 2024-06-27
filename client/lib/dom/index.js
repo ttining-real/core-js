@@ -12,4 +12,6 @@ export * from './showAlert.js';
 export * from './bindEvent.js';
 export * from './endScroll.js';
 export * from './clearContents.js';
+export * from './userList.js';
+export * from './color.js';
 export {default as clearContents} from './clearContents.js';

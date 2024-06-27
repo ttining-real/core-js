@@ -179,6 +179,7 @@ xhr.delete = (url,성공,실패) =>{
 // 이유 : body에 해당하는 객체가 없을 경우 즉 GET같은 경우에는 본문을 가지지않으니까 값이 비어있게 하려고 설정한거고 url 문자열은 비어있어도 오류가 발생하지 않게 하려고 그런것같습니다!
 
 
+// 함수의 매개변수 기본값
 const defaultOptions = {
   method:'GET',
   url: '',
@@ -199,34 +200,45 @@ const defaultOptions = {
 
 export function xhrPromise(options){
 
-  // 객체 합성과 동시에 구조분해할당
-  const {method,url,body,headers,errorMessage} = {
+  // 구조분해할당 + 객체합성
+  const {method, url, body, headers, errorMessage} = {
     ...defaultOptions,
     ...options,
+    // 한 단계 더 들어가서 복사
     headers:{
       ...defaultOptions.headers,
       ...options.headers
     }
   }
 
+  // xhr 객체 생성
   const xhr = new XMLHttpRequest();
+  // console.log(xhr);
 
-  xhr.open(method,url);
+  // initialize(loading) xhr
+  xhr.open(method, url);
 
+  // header 설정
+  // POST, PUT 서버에서 자료를 받았을 때, 이 자료가 어떤 형태다 알려줌 + 권한관련 설정
   Object.entries(headers).forEach(([key,value])=>{
     xhr.setRequestHeader(key,value);
   })
 
+  // PUT, POST 일 때는 body 전송, GET, DELETE는 null 전송
   xhr.send(JSON.stringify(body));
 
+  // Promise 객체 반환
   return new Promise((resolve, reject) => {
     
     xhr.addEventListener('readystatechange',()=>{
       if(xhr.readyState === 4){
+        // status가 200~399이면 성공
         if(xhr.status >= 200 && xhr.status < 400){
+          // 반환하는 Promise 객체의 PromiseResult 프로퍼티에 resolve()안의 내용이 들어감
           resolve(JSON.parse(xhr.response));
         }
         else{
+          // 실패하면 PromiseResult에 reject()안의 내용이 들어감
           reject({message:errorMessage});
         }
       }
@@ -234,6 +246,7 @@ export function xhrPromise(options){
   })
 }
 
+// xhrPromise({url:ENDPOINT}).then((res) => console.log(res))
 
 
 xhrPromise.get = (url) => {

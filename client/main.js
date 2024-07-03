@@ -1,32 +1,22 @@
-class Button extends HTMLElement {
 
-  constructor(){
-    super();
+const template = document.createElement('template');
 
-    // attachShadow를 이용해 c-button의 쉐도우 돔을 열어준다.
-    this.attachShadow({mode: 'open'});
-    // console.log(this.shadowRoot);
-
-    // 그 안에(shadowRoot) 원하는 태그를 집어 넣는다.
-    this.shadowRoot.innerHTML = `
-      <button>Hello</button>
-    `
-
-  }
-
-  connectedCallback(){
-
-  }
-
-  disconnectedCallback(){
-
-  }
+template.innerHTML = `
+<div>bye</div>
+<div>javascript</div>
+`
+console.log(template);
 
 
-}
+// const temp = document.querySelector('#temp');
+const app = document.querySelector('#app');
+// console.log(temp);
+// console.log(temp.content); // fragment
+// console.log(app);
+
+// const clone = temp.content.cloneNode(true); // cloneNode로 deepcopy
+// app.appendChild(clone);
 
 
-customElements.define('c-button',Button);
-
-console.log(document.querySelector('c-button')); // mode가 open이어도 접근 자체가 안된다.
-console.log(document.querySelector('c-button').shadowRoot); // mode가 closed면 shadowRoot에 접근되지 않는다.
+const clone = template.content.cloneNode(true);
+app.appendChild(clone);

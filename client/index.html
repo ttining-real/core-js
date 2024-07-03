@@ -13,24 +13,21 @@
 </head>
 
 <body>
-  <div id="app">
 
-    <c-button></c-button>
+  <div id="app">
+    
+    <user-card>
+      <!-- light dom -->
+      <div slot="username">name: ttining</div>
+      <div>age: 29</div>
+      <div>gender: female</div>
+      <div slot="common">a</div>
+      <div slot="common">b</div>
+      <div slot="common">c</div>
+    </user-card>
 
   </div>
 
-  <template id="temp">
-    <style>
-      div{
-        background-color: red;
-      }
-    </style>
-    <div>hello</div>
-    <div>javascript</div>
-    <script>
-      // alert('템플릿 로드')
-    </script>
-  </template>
 </body>
 
 </html>

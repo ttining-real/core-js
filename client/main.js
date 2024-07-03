@@ -7,10 +7,21 @@ class UserCard extends HTMLElement {
     // shadow dom
     this.attachShadow({mode: 'open'});
     this.shadowRoot.innerHTML = `
-      <div>nickName : ttining-angel</div>
-      <slot name="username"></slot>
-      <slot name="common"></slot>
-      <slot></slot>
+      <style>
+        :host{
+          background-color: orange;
+        }
+        div{
+          background:red;
+        }
+      </style>
+      <div> nickName : ttining-real </div>
+        <slot name="username"></slot>
+        <slot name="age"></slot>
+        <slot name="gender"></slot>
+        <slot name="common"></slot>
+        <slot></slot>
+        <slot name="email">any@naver.com</slot>
     `;
   }
 

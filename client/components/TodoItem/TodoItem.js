@@ -1,3 +1,6 @@
+import { TodoService } from "../../service/TodoService.js";
+
+
 const TodoItemTemplate = document.createElement('template');
 
 TodoItemTemplate.innerHTML = /* html */ `
@@ -36,25 +39,77 @@ export class TodoItem extends HTMLElement {
   }
 
   connectedCallback() {
-    this.contentInput.value = 'TASK' + this.id;
+
+    gsap.from(this,{scale:0});
+
+    const value = this.contentInput.value;
+
+    // this.contentInput.value = 'TASK' + this.id;
+    this.contentInput.value = value ? value  : 'TASK' + this.id;
 
     
-    this.deleteButton.addEventListener('click', () => this.deleteItem());
-    this.checkbox.addEventListener('click', () => this.toggleChecked());
+    this.deleteButton.addEventListener('click', ()=> this.deleteItem())
+    this.checkbox.addEventListener('click', ()=> this.toggleChecked())
+    this.contentInput.addEventListener('blur', ()=> this.updateItem())
+    this.contentInput.addEventListener('keydown', (e)=> this.enterPress(e))
 
-    // TodoService.AddTodoItem(this.id, this.contentInput.value, this.contentInput.checked)
+    TodoService.AddTodoItem(this.id,this.contentInput.value,this.checkbox.checked)
+    this.saveData()
   }
 
   deleteItem() {
-    // console.log(this);
-    this.remove();
+    
+    gsap.to(this,{
+      scale:0,
+      callbackScope:this,
+      onComplete(){
+        TodoService.DeleteTodoItem(this.id)
+        this.remove();
+        this.saveData()
+    }})
+
   }
 
-  toggleChecked() {
-    if (this.checkbox.checked) {
+  toggleChecked(){
+
+    if(this.checkbox.checked){
       this.contentInput.classList.add('done');
-    } else {
+    }else{
       this.contentInput.classList.remove('done');
     }
+
+    TodoService.CheckTodoItem(this.id,this.checkbox.checked)
+    this.saveData()
+    
   }
+
+  updateItem(){
+
+    TodoService.UpdateTodoItem(this.id,this.contentInput.value)
+    this.saveData()
+
+  }
+
+  enterPress({keyCode}){
+
+    if(keyCode === 13){
+      
+      if(this.nextElementSibling !== null){
+        const next = this.nextElementSibling.shadowRoot.querySelector('input[type="text"]');
+
+        this.contentInput.blur();
+        next.focus();
+      }
+      else{
+        this.contentInput.blur();
+      }
+      
+    }
+
+  }
+
+  saveData(){
+    localStorage.setItem('todo',JSON.stringify(TodoService.state));
+  }
+
 }

@@ -1,6 +1,6 @@
 
 // 생성자로 쓰지 않을 거임 => static 메서드 사용
-class TodoService {
+export class TodoService {
 
   static state = [];
 
@@ -13,8 +13,23 @@ class TodoService {
     console.log(...this.state);
   }
 
-  static DeleteTodoItem(id) {
+  static DeleteTodoItem(id){
+
+    this.state = this.state.filter(t => t.id !== id);
+    console.log(...this.state);
     
+  }
+
+  static CheckTodoItem(id,checked){
+    const t = this.state.find( t => t.id === id);
+    t.checked = checked;
+    console.log(...this.state);
+  }
+
+  static UpdateTodoItem(id,value){
+    const t = this.state.find( t => t.id === id);
+    t.value = value;
+    console.log(...this.state);
   }
 
 }
